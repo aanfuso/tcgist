@@ -19,6 +19,7 @@ const OfferLink = ({itemName, buyerName, buyerPhone }) => {
 }
 
 const BuylistItem = ({
+  onMouseEnter,
   item: {
     collectorNumber,
     name: itemName,
@@ -46,8 +47,10 @@ const BuylistItem = ({
       }
     >
       <ListItemText
+        onMouseEnter={onMouseEnter}
         primary={`${quantity} ${itemName}`}
         secondary={`${set} #${collectorNumber}`}
+        sx={{ cursor: 'pointer' }}
       />
     </ListItem>
   )

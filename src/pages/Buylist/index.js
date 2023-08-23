@@ -8,12 +8,11 @@ import {
 } from '@mui/material'
 
 import BuylistItem from './BuylistItem'
+import CardPreview from './CardPreview'
 
 import { SAMPLE_BUYLIST } from './data'
 
-const sectionStyles = {
-  p: 10,
-}
+const sectionStyles = { p: 10 }
 
 function Buylist() {
   const [buyer,] = useState({
@@ -24,21 +23,21 @@ function Buylist() {
     SAMPLE_BUYLIST
       .map(obj => ({ ...obj, toOffer: 0 }))
   )
+  const [preview, setPreview] = useState({})
+
   const { name } = buyer
 
   const listing = items.map((item, index) => (
     <BuylistItem
-      key={`index-${index}`}
       buyer={buyer}
       item={item}
+      key={`index-${index}`}
+      onMouseEnter={() => setPreview(item)}
     />
   ))
 
   return (
-    <Box
-      id="whatsapp-buylist"
-      sx={sectionStyles}
-    >
+    <Box id="whatsapp-buylist" sx={sectionStyles}>
         <Typography gutterBottom variant="h5">
           {name}'s buylist
         </Typography>
@@ -55,8 +54,9 @@ function Buylist() {
 
         <Grid container>
           <Grid item sm="2" md="3" sx={{ display: { xs: 'none', md: 'block' } }}>
-
+            <CardPreview item={preview} />
           </Grid>
+
           <Grid item xs="12" md="9">
             <Box sx={{ display: 'flex', flexFlow: 'column wrap' }}>
               <List sx={{ columnCount: { sm: 1, md: 2, lg: 2, xl: 3 } }}>
