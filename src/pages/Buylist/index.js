@@ -2,6 +2,8 @@ import { useState } from 'react'
 import {
   Box,
   Divider,
+  Grid,
+  List,
   Typography,
 } from '@mui/material'
 
@@ -51,25 +53,18 @@ function Buylist() {
 
         <Divider />
 
-        <Box
-          sx={{
-            display: 'flex',
-            flexFlow: 'column wrap',
-          }}
-        >
-          <Box
-            sx={{
-              minHeight: '100vh',
-              columnCount: {
-                xs: 1,
-                sm: 2,
-                md: 3,
-              },
-            }}
-          >
-            {listing}
-          </Box>
-        </Box>
+        <Grid container>
+          <Grid item sm="2" md="3" sx={{ display: { xs: 'none', md: 'block' } }}>
+
+          </Grid>
+          <Grid item xs="12" md="9">
+            <Box sx={{ display: 'flex', flexFlow: 'column wrap' }}>
+              <List sx={{ columnCount: { sm: 1, md: 2, lg: 2, xl: 3 } }}>
+                {listing}
+              </List>
+            </Box>
+          </Grid>
+        </Grid>
      </Box>
   )
 }

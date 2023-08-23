@@ -33,7 +33,6 @@ const BuylistItem = ({
 
   return (
     <ListItem
-      dense
       secondaryAction = {
         <div className='quantity'>
           <span>
