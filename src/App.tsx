@@ -1,11 +1,23 @@
-import Layout from  'lib/components/Layout';
-import Buylist from 'pages/Buylist';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Buylist from "pages/Buylist";
 
 function App() {
   return (
-    <Layout>
-      <Buylist />
-    </Layout>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Buylist />} />
+
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
