@@ -20,7 +20,6 @@ function CardPreview({ item, imageSize = 'normal' }) {
 
   const {
     collectorNumber,
-    quantity,
     set,
   } = item
 
