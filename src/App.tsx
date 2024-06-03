@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Buylist from "pages/Buylist";
+import { Buylist } from "pages/Buylist";
 
 function App() {
   return (

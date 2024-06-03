@@ -1,12 +1,12 @@
-import { get } from 'lib/request'
+import { get } from "lib/request";
 
 export const getCard = async ({ set, collectorNumber }) => {
-  const response = await get(`/cards/${set}/${collectorNumber}`)
-  const card = response
+  const response = await get(`/cards/${set}/${collectorNumber}`);
+  const card = response;
 
-  console.log('Response: ', JSON.stringify(card, null, 2))
-  return parseCard(card)
-}
+  console.log("Response: ", JSON.stringify(card, null, 2));
+  return parseCard(card);
+};
 
 const parseCard = ({
   artist,
@@ -19,19 +19,13 @@ const parseCard = ({
   set_name: setName,
   set,
 }) => {
-  let imageUris = {
-    front: { ...image_uris },
-  }
+  let imageUris = { front: { ...image_uris } };
 
   if (frontFace && backFace) {
     imageUris = {
-      front: {
-        ...frontFace.image_uris,
-      },
-      back: {
-        ...backFace.image_uris,
-      }
-    }
+      front: { ...frontFace.image_uris },
+      back: { ...backFace.image_uris },
+    };
   }
 
   return {
@@ -44,4 +38,4 @@ const parseCard = ({
     set,
     setName,
   }
-}
+};

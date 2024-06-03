@@ -1,11 +1,7 @@
-import {
-  Link,
-  ListItem,
-  ListItemText,
-} from '@mui/material'
+import { Link, ListItem, ListItemText } from "@mui/material";
 
 const OfferLink = ({itemName, buyerName, buyerPhone }) => {
-  const greeting = `Hi ${buyerName}, I have a ${itemName} for sale.`
+  const greeting = `Hi ${buyerName}, I have a ${itemName} for sale.`;
 
   return (
     <Link
@@ -16,9 +12,9 @@ const OfferLink = ({itemName, buyerName, buyerPhone }) => {
       Offer
     </Link>
   )
-}
+};
 
-const BuylistItem = ({
+export const BuylistItem = ({
   onMouseEnter,
   item: {
     collectorNumber,
@@ -35,7 +31,7 @@ const BuylistItem = ({
   return (
     <ListItem
       secondaryAction = {
-        <div className='quantity'>
+        <div className="quantity">
           <span>
             <OfferLink
               itemName={itemName}
@@ -50,10 +46,8 @@ const BuylistItem = ({
         onMouseEnter={onMouseEnter}
         primary={`${quantity} ${itemName}`}
         secondary={`${set} #${collectorNumber}`}
-        sx={{ cursor: 'pointer' }}
+        sx={{ cursor: "pointer" }}
       />
     </ListItem>
-  )
-}
-
-export default BuylistItem
+  );
+};

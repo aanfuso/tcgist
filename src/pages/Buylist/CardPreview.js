@@ -1,14 +1,10 @@
-import { useState, useEffect } from 'react'
-import {
-  Box,
-  CardMedia,
-  Typography,
-} from '@mui/material'
+import { useState, useEffect } from "react"
+import { Box, CardMedia, Typography } from "@mui/material";
 
-import { getCard } from './data/cards'
+import { getCard } from "./data/cards";
 
-function CardPreview({ item, imageSize = 'normal' }) {
-  const [card, setCard] = useState({})
+export function CardPreview({ item, imageSize = "normal" }) {
+  const [card, setCard] = useState({});
 
   const {
     artist,
@@ -16,29 +12,29 @@ function CardPreview({ item, imageSize = 'normal' }) {
     imageUris,
     prices,
     setName,
-  } = card
+  } = card;
 
   const {
     collectorNumber,
     set,
-  } = item
+  } = item;
 
   useEffect(() => {
-    if (!set || !collectorNumber) return
+    if (!set || !collectorNumber) return;
 
     getCard({ set, collectorNumber })
-      .then(setCard)
-  }, [set, collectorNumber])
+      .then(setCard);
+  }, [set, collectorNumber]);
 
-  let image = '/mtg-card-back.jpg'
+  let image = "/mtg-card-back.jpg";
   if (imageSize && imageUris?.front) {
-    image = imageUris?.front[imageSize]
+    image = imageUris?.front[imageSize];
   }
 
   return (
     <Box
       sx={{
-        width: '100%',
+        width: "100%",
         maxWidth: 360,
         p: 2,
       }}
@@ -64,7 +60,5 @@ function CardPreview({ item, imageSize = 'normal' }) {
         EUR {prices?.eur}
       </Typography>
     </Box>
-  )
-}
-
-export default CardPreview
+  );
+};
