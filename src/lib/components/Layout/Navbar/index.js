@@ -21,10 +21,7 @@ function Navbar() {
       color="transparent"
       sx={{backdropFilter: "blur(20px)"}}
     >
-      <Container
-        disableGutters
-        maxWidth="xl"
-      >
+      <Container disableGutters maxWidth="xl">
         <Toolbar>
           <Typography
             variant="h6"
@@ -45,7 +42,6 @@ function Navbar() {
             </Link>
           </Typography>
 
-          {/* big screen */}
           <Box sx={{ ml: 3, flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             <Stack spacing={1} direction="row">
               {NAVIGATION.map(({anchor, text}) => (
@@ -63,11 +59,8 @@ function Navbar() {
             sx={{ display: { xs: 'none', md: 'flex' }}}>
             <SocialLinks />
           </Box>
-          {/* end big screen */}
 
-          {/* small screen */}
           <MenuDrawer />
-          {/* end small screen */}
         </Toolbar>
       </Container>
     </AppBar>
