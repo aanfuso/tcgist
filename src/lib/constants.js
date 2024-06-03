@@ -1,4 +1,4 @@
-export const BRAND = 'MTG Buylist'
+export const BRAND = 'TCGist'
 
 export const defaultSectionStyles = {
   px: {
