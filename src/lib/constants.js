@@ -10,4 +10,6 @@ export const defaultSectionStyles = {
   },
 }
 
-export const NAVIGATION = []
+export const NAVIGATION = [
+  { anchor: '/new', text: 'Create a list', options: {} }
+]
