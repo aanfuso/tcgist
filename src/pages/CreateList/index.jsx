@@ -55,6 +55,9 @@ export function CreateList() {
         </Typography>
           <Input
             aria-label="List input"
+            disableUnderline={true}
+            maxRows={20}
+            minRows={15}
             multiline
             placeholder="Paste your list here..."
             onChange={handleChange}
