@@ -19,7 +19,7 @@ const parseByApp = {
 export const parseLine = (line) => {
   const app = "tcg";
   const { setIndex, nameIndex, variantIndex } = parseByApp[app];
-  const quantity = line.substring(0, line.indexOf(" "));
+  const quantity = Number(line.substring(0, line.indexOf(" ")));
   const set = line.substring(
     line.indexOf(setIndex[0]) + 1,
     line.indexOf(setIndex[1])
