@@ -1,8 +1,10 @@
 import { get } from "lib/request";
 
 export const getCard = async ({ set, collectorNumber }) => {
+  const lowercaseSet = set.toLowerCase();
+
   try {
-    const response = await get(`/cards/${set}/${collectorNumber}`);
+    const response = await get(`/cards/${lowercaseSet}/${collectorNumber}`);
 
     return parseCard(response);
   } catch (error) {
