@@ -4,8 +4,7 @@ import {
 } from "@mui/material/styles";
 
 import { components } from "../base/components";
-
-const palette = {}
+import { palette } from "./color";
 
 const theme = createTheme({
   components,
