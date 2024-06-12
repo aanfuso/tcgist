@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Divider, Grid, List, Typography } from "@mui/material";
 
 import { BuylistItem } from "./BuylistItem";
@@ -6,7 +6,7 @@ import { CardPreview } from "./CardPreview";
 
 import Layout from "lib/components/Layout";
 
-import { SAMPLE_BUYLIST } from "./data";
+import { loadFromLocalStorage } from "utils";
 
 const sectionStyles = { p: 10 };
 
@@ -15,11 +15,16 @@ export function Buylist() {
     name: "Agustin",
     phone: "971505246532",
   });
-  const [items,] = useState(
-    SAMPLE_BUYLIST
-      .map(obj => ({ ...obj, toOffer: 0 }))
-  );
+  const [items, setItems] = useState([]);
   const [preview, setPreview] = useState({});
+
+  useEffect(() => {
+    const stored = loadFromLocalStorage();
+
+    if (stored.length) {
+      setItems(stored);
+    }
+  }, []);
 
   const { name } = buyer;
 
