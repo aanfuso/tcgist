@@ -10,10 +10,6 @@ import {
 
 import { useLocalStorage } from "utils/hooks";
 
-const SECTION_STYLES = {
-  pt: 10,
-  height: "100vh",
-};
 
 export function CreateList() {
   const [textList, setTextList] = useState("");
@@ -43,7 +39,7 @@ export function CreateList() {
 
   return (
     <Layout>
-      <Container sx={SECTION_STYLES}>
+      <Container sx={{ pt: 10, height: "100vh" }}>
         <Typography gutterBottom variant="h5">
           Create a new list
         </Typography>
