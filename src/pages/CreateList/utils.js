@@ -7,11 +7,12 @@ export const convertToCSV = (arr) => {
     isPromo,
     isFoil,
   }) => (
-    `${quantity} ${name} (${set}) ${collectorNumber}${isFoil ? " *F*" : ""}`
+    // `${quantity} ${name} (${set}) ${collectorNumber}${isFoil ? " *F*" : ""}`
+    `${quantity},${name},${collectorNumber},${set},${isFoil ? "Foil" : "Normal"}`
   )).join('\n')
 };
 
-export function parseLine(cardData) {
+export function parseLineA(cardData) {
   const regex = /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#\!.+)?/g;
   const match = regex.exec(cardData);
 
@@ -26,8 +27,24 @@ export function parseLine(cardData) {
   return {
     quantity: Number(quantity),
     name,
-    set: set.toLowerCase(),
+    set,
     collectorNumber,
     isFoil,
+  };
+};
+
+export function parseLine(line) {
+  const regex = /(\d+),(.+?),(\d+p?),(.+?),(.+?)/g;
+  const fields = regex.exec(line);
+
+  console.log("fields", fields);
+  if (fields === null) return {};
+
+  return {
+    quantity: parseInt(fields[1]),
+    name: fields[2].replace(/"/g, ''),
+    set: fields[4],
+    collectorNumber: parseInt(fields[3]),
+    isFoil: fields[5] === 'F' ? true : false,
   };
 };
