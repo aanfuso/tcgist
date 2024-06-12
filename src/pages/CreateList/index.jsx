@@ -6,8 +6,11 @@ import Layout from 'lib/components/Layout';
 import {
   parseLine,
   convertToCSV,
-  loadFromLocalStorage,
  } from './utils';
+
+import {
+  loadFromLocalStorage,
+} from 'utils';
 
 const SECTION_STYLES = {
   pt: 10,

@@ -1,0 +1,1 @@
+export { loadFromLocalStorage } from './storage';

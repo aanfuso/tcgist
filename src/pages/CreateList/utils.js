@@ -4,17 +4,6 @@ export const convertToCSV = (arr) => {
   }).join('\n')
 };
 
-
-export const loadFromLocalStorage = () => {
-  const buylist = localStorage.getItem("buylist");
-
-  if (buylist) {
-    return JSON.parse(buylist);
-  }
-
-  return [];
-};
-
 const parseByApp = {
   mox: {
     setIndex: ["(", ")"],
