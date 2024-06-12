@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { Button, Container, Input, Stack, Typography } from '@mui/material';
+import { useState, useEffect } from "react";
+import { Button, Container, Input, Stack, Typography } from "@mui/material";
 
-import Layout from 'lib/components/Layout';
+import Layout from "lib/components/Layout";
 
 import {
   parseLine,
   convertToCSV,
- } from './utils';
+ } from "./utils";
 
 import {
   loadFromLocalStorage,
-} from 'utils';
+} from "utils";
 
 const SECTION_STYLES = {
   pt: 10,
@@ -27,13 +27,12 @@ export function CreateList() {
     if (stored.length) {
       const toText = convertToCSV(stored);
 
-      console.log(toText);
       setList(toText);
     }
   }, []);
 
   useEffect(() => {
-    setData(list.split('\n').map(parseLine));
+    setData(list.split("\n").map(parseLine));
   }, [list]);
 
   const handleChange = (event) => {
