@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
 
 import Layout from "lib/components/Layout";
+import PlatformSelector from "./PlatformSelector";
 
 import {
   parseLine,
@@ -14,6 +15,7 @@ import { useLocalStorage } from "utils/hooks";
 export function CreateList() {
   const [textList, setTextList] = useState("");
   const [items, setItems] = useLocalStorage("buylist", []);
+  const [parser, setParser] = useState("moxfield");
 
   useEffect(() => {
     if (items.length) {
@@ -37,22 +39,31 @@ export function CreateList() {
     window.location.href = "/";
   }
 
+  const handlePlatformChange = (event, platform) => {
+    setParser(platform);
+  }
+
   return (
     <Layout>
       <Container sx={{ pt: 10, height: "100vh" }}>
         <Typography gutterBottom variant="h5">
           Create a new list
         </Typography>
-          <Input
-            aria-label="List input"
-            disableUnderline={true}
-            maxRows={20}
-            minRows={15}
-            multiline
-            placeholder="Paste your list here..."
-            onChange={handleChange}
-            value={textList}
-          />
+        <PlatformSelector
+          platform={parser}
+          handleChange={handlePlatformChange}
+        />
+
+        <Input
+          aria-label="List input"
+          disableUnderline={true}
+          maxRows={20}
+          minRows={15}
+          multiline
+          placeholder="Paste your list here..."
+          onChange={handleChange}
+          value={textList}
+        />
 
         <Stack
           direction="row"
