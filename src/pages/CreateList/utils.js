@@ -1,43 +1,33 @@
 export const convertToCSV = (arr) => {
-  return arr.map(it => {
-    return it.line
-  }).join('\n')
-};
-
-const parseByApp = {
-  mox: {
-    setIndex: ["(", ")"],
-    nameIndex: [" ", " ("],
-  },
-  tcg: {
-    setIndex: ["[", "]"],
-    nameIndex: [" ", " ["],
-    variantIndex: ["(", ")"],
-  },
-};
-
-export const parseLine = (line) => {
-  const app = "tcg";
-  const { setIndex, nameIndex, variantIndex } = parseByApp[app];
-  const quantity = Number(line.substring(0, line.indexOf(" ")));
-  const set = line.substring(
-    line.indexOf(setIndex[0]) + 1,
-    line.indexOf(setIndex[1])
-  );
-  const name = line.substring(
-    line.indexOf(nameIndex[0]) + 1,
-    line.indexOf(nameIndex[1])
-  );
-  const variant = line.substring(
-    line.indexOf(variantIndex[0]) + 1,
-    line.indexOf(variantIndex[1])
-  );
-
-  return {
+  return arr.map(({
     quantity,
     name,
     set,
-    variant,
-    line,
+    collectorNumber,
+    isPromo,
+    isFoil,
+  }) => (
+    `${quantity} ${name} (${set}) ${collectorNumber}${isFoil ? " *F*" : ""}`
+  )).join('\n')
+};
+
+export function parseLine(cardData) {
+  const regex = /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#\!.+)?/g;
+  const match = regex.exec(cardData);
+
+  if (match === null) return {};
+
+  const quantity = match[1];
+  const name = match[2];
+  const set = match[3];
+  const collectorNumber = match[4];
+  const isFoil = match[5] ? true : false;
+
+  return {
+    quantity: Number(quantity),
+    name,
+    set: set.toLowerCase(),
+    collectorNumber,
+    isFoil,
   };
 };
