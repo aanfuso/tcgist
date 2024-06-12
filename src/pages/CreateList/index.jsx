@@ -8,9 +8,7 @@ import {
   convertToCSV,
  } from "./utils";
 
-import {
-  loadFromLocalStorage,
-} from "utils";
+import { useLocalStorage } from "utils/hooks";
 
 const SECTION_STYLES = {
   pt: 10,
@@ -18,33 +16,27 @@ const SECTION_STYLES = {
 };
 
 export function CreateList() {
-  const [list, setList] = useState("");
-  const [data, setData] = useState([]);
+  const [textList, setTextList] = useState("");
+  const [items, setItems] = useLocalStorage("buylist", []);
 
   useEffect(() => {
-    const stored = loadFromLocalStorage();
+    if (items.length) {
+      const asText = convertToCSV(items);
 
-    if (stored.length) {
-      const toText = convertToCSV(stored);
-
-      setList(toText);
+      setTextList(asText);
     }
   }, []);
-
-  useEffect(() => {
-    setData(list.split("\n").map(parseLine));
-  }, [list]);
 
   const handleChange = (event) => {
     const text = event.target.value;
 
-    setList(text);
+    setTextList(text);
   }
 
   const handleSave = () => {
-    console.log(data);
+    const data = textList.split("\n").map(parseLine);
 
-    localStorage.setItem("buylist", JSON.stringify(data));
+    setItems(data);
 
     window.location.href = "/";
   }
@@ -63,7 +55,7 @@ export function CreateList() {
             multiline
             placeholder="Paste your list here..."
             onChange={handleChange}
-            value={list}
+            value={textList}
           />
 
         <Stack
