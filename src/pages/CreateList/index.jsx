@@ -6,24 +6,29 @@ import PlatformSelector from "./PlatformSelector";
 
 import {
   convertToCSV,
-  parseTCGLine,
+  parseList,
  } from "./utils";
 
 import { useLocalStorage } from "utils/hooks";
 
-
 export function CreateList() {
-  const [textList, setTextList] = useState("");
+  const [textList, setTextList] = useState();
   const [items, setItems] = useLocalStorage("buylist", []);
   const [parser, setParser] = useState("moxfield");
 
   useEffect(() => {
     if (items.length) {
-      const asText = convertToCSV(items);
+      const asText = convertToCSV(items, parser);
 
       setTextList(asText);
     }
-  }, []);
+  }, [parser]);
+
+  useEffect(() => {
+    if (!textList) return;
+
+    console.log(parseList(textList, parser))
+  }, [textList]);
 
   const handleChange = (event) => {
     const text = event.target.value;
@@ -32,7 +37,7 @@ export function CreateList() {
   }
 
   const handleSave = () => {
-    const data = textList.split("\n").map(parseTCGLine);
+    const data = parseList(textList, parser);
 
     setItems(data);
 

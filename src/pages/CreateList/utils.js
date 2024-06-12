@@ -1,43 +1,85 @@
-export const convertToCSV = (arr) => {
-  return arr.map(({
+const MOXFIELD = "moxfield";
+const TCGPLAYER = "tcgplayer";
+const DELVERSCAN = "delverscan"
+
+export const AVAILABLE_PLATFORMS = [MOXFIELD, TCGPLAYER, DELVERSCAN];
+
+const TEMPLATE_BY_PLATFORM = {
+  [MOXFIELD]: ({
     quantity,
     name,
     set,
     collectorNumber,
-    isPromo,
     isFoil,
   }) => (
-    // `${quantity} ${name} (${set}) ${collectorNumber}${isFoil ? " *F*" : ""}`
+    `${quantity} ${name} (${set}) ${collectorNumber}${isFoil ? " *F*" : ""}`
+  ),
+  [TCGPLAYER]: ({
+    quantity,
+    name,
+    set,
+    collectorNumber,
+    isFoil,
+  }) => (
     `${quantity},${name},${collectorNumber},${set},${isFoil ? "Foil" : "Normal"}`
-  )).join('\n')
+  )
+}
+
+export const convertToCSV = (arr, platform) => {
+  const template = TEMPLATE_BY_PLATFORM[platform];
+
+  return arr.map(template).join("\n")
 };
 
-export function parseMoxLine(cardData) {
-  const regex = /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#\!.+)?/g;
-  const match = regex.exec(cardData);
-
-  if (match === null) return {};
-
-  return {
-    quantity: Number(match[1]),
-    name: match[2],
-    set: match[3],
-    collectorNumber: match[4],
-    isFoil: match[5] ? true : false,
-  };
+const REGEX_BY_PLATFORM = {
+  [MOXFIELD]: /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#\!.+)?/g,
+  [TCGPLAYER]: /(\d+),(.+?),(\d+p?),(.+?),(.+?)/g,
 };
 
-export function parseTCGLine(cardData) {
-  const regex = /(\d+),(.+?),(\d+p?),(.+?),(.+?)/g;
-  const match = regex.exec(cardData);
+const INDEX_BY_PLATFORM = {
+  [MOXFIELD]: {
+    quantity: 1,
+    name: 2,
+    set: 3,
+    collectorNumber: 4,
+    isFoil: 5,
+  },
+  [TCGPLAYER]: {
+    quantity: 1,
+    name: 2,
+    collectorNumber: 3,
+    set: 4,
+    isFoil: 5,
+  }
+};
 
-  if (match === null) return {};
+export function parseList(text, platform) {
+  if (!text) return [];
 
-  return {
-    quantity: parseInt(match[1]),
-    name: match[2].replace(/"/g, ''),
-    set: match[4],
-    collectorNumber: parseInt(match[3]),
-    isFoil: match[5] === 'F' ? true : false,
-  };
+  const rows = text.split("\n");//.filter((line) => line !== "");
+
+  const index = INDEX_BY_PLATFORM[platform];
+
+  return rows.map((cardData, i) => {
+    const regex = REGEX_BY_PLATFORM[platform];
+    const matches = regex.exec(cardData);
+    regex.lastIndex = 0;
+
+    if (matches === null) return {};
+
+    let isFoil = false;
+    if (platform === MOXFIELD) {
+      isFoil = matches[index.isFoil] ? true : false;
+    } else if (platform === TCGPLAYER) {
+      isFoil = matches[index.isFoil] === "F";
+    }
+
+    return {
+      quantity: parseInt(matches[index.quantity]),
+      name: matches[index.name],
+      set: matches[index.set],
+      collectorNumber: matches[index.collectorNumber],
+      isFoil,
+    };
+  });
 };
