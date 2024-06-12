@@ -5,8 +5,8 @@ import Layout from "lib/components/Layout";
 import PlatformSelector from "./PlatformSelector";
 
 import {
-  parseLine,
   convertToCSV,
+  parseTCGLine,
  } from "./utils";
 
 import { useLocalStorage } from "utils/hooks";
@@ -32,7 +32,7 @@ export function CreateList() {
   }
 
   const handleSave = () => {
-    const data = textList.split("\n").map(parseLine);
+    const data = textList.split("\n").map(parseTCGLine);
 
     setItems(data);
 
