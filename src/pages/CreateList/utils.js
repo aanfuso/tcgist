@@ -37,7 +37,7 @@ export const convertToCSV = (arr, platform) => {
 };
 
 const REGEX_BY_PLATFORM = {
-  [MOXFIELD]: /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#\!.+)?/g,
+  [MOXFIELD]: /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#!.+)?/g,
   [TCGPLAYER]: /(\d+),(.+?),(\d+p?),(.+?),(.+?)/g,
   [DELVERSCAN]: /"(\d)+x","(.+?)","(.+?)?","\((.+?)\)","(\d+p?)"/g,
 };
