@@ -23,13 +23,7 @@ export function CreateList() {
 
       setTextList(asText);
     }
-  }, [parser]);
-
-  useEffect(() => {
-    if (!textList) return;
-
-    console.log(parseList(textList, parser))
-  }, [textList]);
+  }, [parser, items]);
 
   const handleChange = (event) => {
     const text = event.target.value;
