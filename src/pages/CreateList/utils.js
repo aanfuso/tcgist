@@ -18,7 +18,16 @@ const TEMPLATE_BY_PLATFORM = {
     isFoil,
   }) => (
     `${quantity},${name},${collectorNumber},${set},${isFoil ? "Foil" : "Normal"}`
-  )
+  ),
+  [DELVERSCAN]: ({
+    quantity,
+    name,
+    set,
+    collectorNumber,
+    isFoil,
+  }) => (
+    `"${quantity}x","${name}","${isFoil ? "Foil" : ""}","(${set})","${collectorNumber}"`
+  ),
 }
 
 export const convertToCSV = (arr, platform) => {
@@ -30,6 +39,7 @@ export const convertToCSV = (arr, platform) => {
 const REGEX_BY_PLATFORM = {
   [MOXFIELD]: /(\d+)\s(.+?)\s\((.+?)\)\s(\d+p?)(\s\*F\*)?(\s#\!.+)?/g,
   [TCGPLAYER]: /(\d+),(.+?),(\d+p?),(.+?),(.+?)/g,
+  [DELVERSCAN]: /"(\d)+x","(.+?)","(.+?)?","\((.+?)\)","(\d+p?)"/g,
 };
 
 const INDEX_BY_PLATFORM = {
@@ -46,6 +56,13 @@ const INDEX_BY_PLATFORM = {
     collectorNumber: 3,
     set: 4,
     isFoil: 5,
+  },
+  [DELVERSCAN]: {
+    quantity: 1,
+    name: 2,
+    collectorNumber: 5,
+    set: 4,
+    isFoil: 3,
   }
 };
 
@@ -68,6 +85,8 @@ export function parseList(text, platform) {
       isFoil = matches[index.isFoil] ? true : false;
     } else if (platform === TCGPLAYER) {
       isFoil = matches[index.isFoil] === "F";
+    } else if (platform === DELVERSCAN) {
+      isFoil = matches[index.isFoil] === "Foil";
     }
 
     return {
