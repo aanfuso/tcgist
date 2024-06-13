@@ -1,11 +1,17 @@
 import { get } from "lib/request";
 
 export const getCard = async ({ set, collectorNumber }) => {
-  const response = await get(`/cards/${set}/${collectorNumber}`);
-  const card = response;
+  const lowercaseSet = set.toLowerCase();
 
-  console.log("Response: ", JSON.stringify(card, null, 2));
-  return parseCard(card);
+  try {
+    const response = await get(`/cards/${lowercaseSet}/${collectorNumber}`);
+
+    return parseCard(response);
+  } catch (error) {
+    console.log('There was an error', error);
+
+    return {};
+  }
 };
 
 const parseCard = ({

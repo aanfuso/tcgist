@@ -6,7 +6,7 @@ import { CardPreview } from "./CardPreview";
 
 import Layout from "lib/components/Layout";
 
-import { SAMPLE_BUYLIST } from "./data";
+import { useLocalStorage } from "utils/hooks";
 
 const sectionStyles = { p: 10 };
 
@@ -15,11 +15,8 @@ export function Buylist() {
     name: "Agustin",
     phone: "971505246532",
   });
-  const [items,] = useState(
-    SAMPLE_BUYLIST
-      .map(obj => ({ ...obj, toOffer: 0 }))
-  );
   const [preview, setPreview] = useState({});
+  const [items,] = useLocalStorage("buylist", []);
 
   const { name } = buyer;
 
