@@ -1,8 +1,4 @@
-const MOXFIELD = "moxfield";
-const TCGPLAYER = "tcgplayer";
-const DELVERSCAN = "delverscan"
-
-export const AVAILABLE_PLATFORMS = [MOXFIELD, TCGPLAYER, DELVERSCAN];
+import { MOXFIELD, TCGPLAYER, DELVERSCAN } from "utils/constants";
 
 const TEMPLATE_BY_PLATFORM = {
   [MOXFIELD]: ({

@@ -10,11 +10,12 @@ import {
  } from "./utils";
 
 import { useLocalStorage } from "utils/hooks";
+import { MOXFIELD } from "utils/constants";
 
 export function CreateList() {
   const [textList, setTextList] = useState();
   const [items, setItems] = useLocalStorage("buylist", []);
-  const [parser, setParser] = useState("moxfield");
+  const [parser, setParser] = useState(MOXFIELD);
 
   useEffect(() => {
     if (items.length) {
