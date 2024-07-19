@@ -4,7 +4,12 @@ import {
   Typography,
 } from '@mui/material';
 
-function Footer() {
+function Footer(props) {
+  const {
+    topText = 'Made with ❤️',
+    bottomText = '',
+    url = '/',
+  } = props;
   const today = new Date();
   const year = today.getFullYear();
 
@@ -15,12 +20,13 @@ function Footer() {
       maxWidth={false}
       sx={{ py: 10 }}
     >
+
         <Typography gutterBottom variant="body2" textAlign="center">
-          Made with ❤️ by
+          {topText}
         </Typography>
         <Typography textAlign="center">
-          <Link href="#main" underline="none">
-            Logo
+          <Link href={url} underline="none">
+            {bottomText}
           </Link>
         </Typography>
         <Typography variant="body2" textAlign="center" >

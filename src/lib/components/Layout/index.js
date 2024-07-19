@@ -10,6 +10,7 @@ const Layout = (props) => {
     children,
     theme,
     disableNavbar,
+    footerProps,
   } = props;
 
   const navbarComponent = disableNavbar ? null : <Navbar {...props}/>;
@@ -21,7 +22,7 @@ const Layout = (props) => {
       {navbarComponent}
       {children}
       <BackToTopButton />
-      <Footer {...props}/>
+      <Footer {...footerProps}/>
     </ThemeProvider>
   )
 };

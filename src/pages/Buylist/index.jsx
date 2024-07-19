@@ -8,6 +8,7 @@ import Layout from "lib/components/Layout";
 
 import { base } from "themes";
 import { useLocalStorage } from "utils/hooks";
+import { FOOTER_PROPS } from "shared/constants";
 
 const sectionStyles = { p: 10 };
 
@@ -31,7 +32,7 @@ export function Buylist() {
   ));
 
   return (
-    <Layout theme={base} disableNavbar={true}>
+    <Layout theme={base} disableNavbar={true} footerProps={FOOTER_PROPS}>
       <Box id="whatsapp-buylist" sx={sectionStyles}>
         <Typography gutterBottom variant="h5">
           {name}'s buylist
