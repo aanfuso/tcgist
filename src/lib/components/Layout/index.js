@@ -5,15 +5,25 @@ import Navbar from './Navbar';
 import BackToTopButton from './BackToTopButton';
 import Footer from './Footer';
 
-const Layout = (props) => (
-  <ThemeProvider theme={props.theme}>
-    <CssBaseline />
+const Layout = (props) => {
+  const {
+    children,
+    theme,
+    disableNavbar,
+  } = props;
 
-    <Navbar {...props}/>
-    {props.children}
-    <BackToTopButton />
-    <Footer {...props}/>
-  </ThemeProvider>
-);
+  const navbarComponent = disableNavbar ? null : <Navbar {...props}/>;
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+
+      {navbarComponent}
+      {children}
+      <BackToTopButton />
+      <Footer {...props}/>
+    </ThemeProvider>
+  )
+};
 
 export default Layout;

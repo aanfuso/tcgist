@@ -6,6 +6,7 @@ import { CardPreview } from "./CardPreview";
 
 import Layout from "lib/components/Layout";
 
+import { base } from "themes";
 import { useLocalStorage } from "utils/hooks";
 
 const sectionStyles = { p: 10 };
@@ -30,7 +31,7 @@ export function Buylist() {
   ));
 
   return (
-    <Layout>
+    <Layout theme={base} disableNavbar={true}>
       <Box id="whatsapp-buylist" sx={sectionStyles}>
         <Typography gutterBottom variant="h5">
           {name}'s buylist
