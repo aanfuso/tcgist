@@ -1,15 +1,15 @@
 export const getSession = () => {
-  const session = localStorage.getItem('session')
+  const session = localStorage.getItem('session');
 
-  if (!session) return null
+  if (!session) return null;
 
-  const parsedSession = session && JSON.parse(session)
+  const parsedSession = session && JSON.parse(session);
 
-  return parsedSession
+  return parsedSession;
 }
 
 export const setSession = data => {
-  const jsonData = JSON.stringify(data)
+  const jsonData = JSON.stringify(data);
 
-  localStorage.setItem('session', jsonData)
+  localStorage.setItem('session', jsonData);
 }

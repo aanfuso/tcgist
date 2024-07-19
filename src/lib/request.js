@@ -1,57 +1,57 @@
-import { getSession } from './sessions'
+import { getSession } from './sessions';
 
-const API_URL = 'https://api.scryfall.com'
+const API_URL = 'https://api.openai.com/v1';
 
 const defaultOptions = {
   method: 'GET',
   mode: 'cors',
   cache: 'no-cache',
   headers: { 'Content-Type': 'application/json' },
-}
+};
 
 export const fetchApi = async (path, opts = {}) => {
-  const options = Object.assign({}, defaultOptions, opts)
-  const { token } = getSession() || {}
+  const options = Object.assign({}, defaultOptions, opts);
+  const { token } = getSession() || {};
 
   if (token && options.headers.Authorization === undefined) {
-    options.headers.Authorization = `Bearer ${token}`
+    options.headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${path}`, options)
-  const length = response.headers.get('Content-Length')
+  const response = await fetch(`${API_URL}${path}`, options);
+  const length = response.headers.get('Content-Length');
 
   // Unprocessable entity (may be validation errrors)
   if (response.status === 422 && length !== '0')
-    throw response.json()
+    throw response.json();
 
   if (!response.ok)
-    throw toHttpError(response)
+    throw toHttpError(response);
 
   // No content
   if (response.status === 204 || length === '0')
-    return undefined
+    return undefined;
 
-  return response.json()
+  return response.json();
 }
 
 // -- REST --
 
 export const get = path => {
-  return fetchApi(path)
+  return fetchApi(path);
 }
 
 export const post = (path, data) => {
   return fetchApi(path, {
     method: 'POST',
     body: serialize(data),
-  })
+  });
 }
 
 export const patch = (path, data) => {
   return fetchApi(path, {
     method: 'PATCH',
     body: serialize(data),
-  })
+  });
 }
 
 export const delete$ = (path, data) => {
@@ -66,7 +66,7 @@ export const delete$ = (path, data) => {
 const serialize = data => {
   if (data === undefined) return undefined
 
-  return JSON.stringify(data)
+  return JSON.stringify(data);
 }
 
 const toHttpError = ({ status, statusText }) => {
@@ -75,5 +75,5 @@ const toHttpError = ({ status, statusText }) => {
     ? `HTTP ${status}: ${statusText}`
     : `HTTP ${status}`
 
-  return new TypeError(message)
+  return new TypeError(message);
 }

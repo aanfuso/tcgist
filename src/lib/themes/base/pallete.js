@@ -1,6 +1,19 @@
+const primary = {
+  main: 'hsl(170, 48%, 47%)',
+  light: 'hsl(170, 48%, 57%)',
+};
+
+const secondary = {
+  main: 'hsl(256, 49%, 47%)',
+};
+
+const whatsapp = {
+  main: 'hsl(142, 70%, 48%)',
+};
+
 const background = {
   default: "hsl(30, 8%, 95%)",
-}
+};
 
 const blue = {
   100: '#DAECFF',
@@ -25,8 +38,10 @@ const grey = {
 };
 
 export const palette = {
-  mode: 'light',
+  primary,
+  secondary,
   background,
+  whatsapp,
   grey,
   blue,
 };

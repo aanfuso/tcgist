@@ -6,48 +6,38 @@ import {
   Link,
   Stack,
   Toolbar,
-  Typography,
-} from '@mui/material'
+} from '@mui/material';
 
-import { BRAND } from 'lib/constants'
-import { NAVIGATION } from 'lib/constants'
-import SocialLinks from 'lib/components/SocialLinks'
+import ScrollTranformation from './ScrollTranformation';
+import MenuDrawer from './MenuDrawer';
 
-import MenuDrawer from './MenuDrawer'
 
-function Navbar() {
+function Bar(props) {
+  const {
+    appBarStyles,
+    navigation = [],
+  } = props;
+
   return (
-    <AppBar
-      color="transparent"
-      sx={{backdropFilter: "blur(20px)"}}
-    >
-      <Container disableGutters maxWidth="xl">
+    <AppBar {...appBarStyles} >
+      <Container disableGutters maxWidth="lg">
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            sx={{
-              flexGrow: {
-                xs: 1,
-                md: 0,
-              },
-              display: 'flex',
-            }}
-          >
+          <Box sx={{ flexGrow: 1, pt: 2 }}>
             <Link
               href="/"
               underline="none"
             >
-              {BRAND}
+              Logo
             </Link>
-          </Typography>
+          </Box>
 
-          <Box sx={{ ml: 3, flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
             <Stack spacing={1} direction="row">
-              {NAVIGATION.map(({anchor, text}) => (
+              {navigation.map(({ anchor, text, options }) => (
                 <Button
                   href={anchor}
                   key={anchor}
+                  {...options}
                 >
                   {text}
                 </Button>
@@ -55,16 +45,17 @@ function Navbar() {
             </Stack>
           </Box>
 
-          <Box
-            sx={{ display: { xs: 'none', md: 'flex' }}}>
-            <SocialLinks />
-          </Box>
-
-          <MenuDrawer />
+          <MenuDrawer navigation={navigation} />
         </Toolbar>
       </Container>
     </AppBar>
-  )
-}
+  );
+};
 
-export default Navbar
+const Navbar = (props) => (
+  <ScrollTranformation>
+    <Bar {...props} />
+  </ScrollTranformation>
+);
+
+export default Navbar;

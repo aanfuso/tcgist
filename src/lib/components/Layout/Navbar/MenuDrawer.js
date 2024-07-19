@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Box,
   Divider,
@@ -7,21 +7,20 @@ import {
   List,
   ListItemButton,
   ListItemText,
-} from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu'
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-import { NAVIGATION } from 'lib/constants'
-import SocialLinks from 'lib/components/SocialLinks'
 
-function MenuDrawer() {
-  const [isMenuOpen, setOpen] = useState(false)
+function MenuDrawer(props) {
+  const { navigation = [] } = props;
+  const [isMenuOpen, setOpen] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return
+      return;
     }
 
-    setOpen(open)
+    setOpen(open);
   }
 
   const menu = () => (
@@ -32,7 +31,7 @@ function MenuDrawer() {
       sx={{width: 250}}
     >
       <List>
-        {NAVIGATION.map(({anchor, text}) => (
+        {navigation.map(({anchor, text}) => (
           <ListItemButton key={text} component="a" href={anchor} >
             <ListItemText primary={text} />
           </ListItemButton>
@@ -42,10 +41,10 @@ function MenuDrawer() {
       <Divider />
 
       <Box sx={{ p: 2, textAlign: 'center' }}>
-        <SocialLinks />
+        {/* <SocialLinks /> */}
       </Box>
     </Box>
-  )
+  );
 
   return (
     <Box sx={{ display: { md: 'none' } }}>
@@ -65,7 +64,7 @@ function MenuDrawer() {
         {menu()}
       </Drawer>
     </Box>
-  )
-}
+  );
+};
 
-export default MenuDrawer
+export default MenuDrawer;
