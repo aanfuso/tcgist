@@ -5,10 +5,8 @@ import Navbar from './Navbar';
 import BackToTopButton from './BackToTopButton';
 import Footer from './Footer';
 
-import { base } from 'lib/themes';
-
 const Layout = (props) => (
-  <ThemeProvider theme={base}>
+  <ThemeProvider theme={props.theme}>
     <CssBaseline />
 
     <Navbar {...props}/>
