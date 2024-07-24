@@ -8,22 +8,16 @@ import { useLocation, useParams } from 'react-router-dom';
 import qs from 'qs';
 import {
   Button,
-  Checkbox,
   Collapse,
   Container,
-  FormControlLabel,
-  FormGroup,
   Grid,
   Stack,
   Typography,
 } from '@mui/material';
-import {
-  CloudUpload,
-  Favorite,
-  WhatsApp,
-} from '@mui/icons-material';
+import { CloudUpload } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
+import ContactForm from './ContactForm';
 import { CardsExplorer } from './CardsExplorer';
 import { SetCompletion } from './SetCompletion';
 
@@ -104,28 +98,6 @@ export default function SetProgressPage() {
     setCards(newList);
   }
 
-  const TRADE_CONFIG = {
-    gift: {
-      rowFormat: (card) => `- ${card.name}`,
-      closeLine: () => `I'd like to *gift* them to you.`,
-    },
-    sell: {
-      rowFormat: (card) => `- ${card.name} ($${card.prices.usd})`,
-      closeLine: () => `Are you interested in *buying* them? It's ${total.toFixed(2)}. Thank you!`,
-    },
-  };
-
-
-  const handleMessage = () => {
-    const phone = "971505246532";
-    const tradeType = isGift ? 'gift' : 'sell';
-    const { rowFormat, closeLine } = TRADE_CONFIG[tradeType];
-    const list = selected.map(rowFormat).join('\n');
-    const message = `Hi, I have some of the cards you are looking for: \n\n${list}\n\n${closeLine()}`;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, '_blank');
-  }
 
   const statsDebug = (<pre>{JSON.stringify(stats, null, 2) }</pre>);
   const importButton = (
@@ -140,40 +112,6 @@ export default function SetProgressPage() {
       <VisuallyHiddenInput type="file" onChange={handleFile} />
     </Button>
   );
-  const whatsAppButton = (
-    <Collapse in={selected?.length > 0}>
-      <FormGroup>
-        <Typography variant="subtitle2">
-          {selected?.length} cards selected
-        </Typography>
-        <Typography variant="subtitle2">
-          $ {total?.toFixed(2)}
-        </Typography>
-        <FormControlLabel
-          label="Make this a gift for the collectionist"
-          control={
-            <Checkbox
-              onChange={toggleGift}
-              color="secondary"
-              checked={isGift}
-              checkedIcon={<Favorite />}
-            />
-          }
-        />
-        <Button
-          component="label"
-          variant="contained"
-          tabIndex={-1}
-          onClick={handleMessage}
-          startIcon={<WhatsApp />}
-          color="whatsapp"
-        >
-          Message Collectionist
-        </Button>
-      </FormGroup>
-    </Collapse>
-  );
-
   const rows = mergeCards({ cards, list });
   const missing = stats?.missing  || [];
   if (debug) stats = getStats(rows);
@@ -204,7 +142,14 @@ export default function SetProgressPage() {
 
               <Grid item xs={12}>
                 <Stack spacing={2}>
-                  {whatsAppButton}
+                  <Collapse in={selected?.length > 0}>
+                    <ContactForm
+                      selected={selected}
+                      total={total}
+                      isGift={isGift}
+                      toggleGift={toggleGift}
+                    />
+                  </Collapse>
 
                   {debug && importButton}
 
