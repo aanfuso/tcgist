@@ -1,14 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Buylist } from "pages/Buylist";
-import { CreateList } from "pages/CreateList";
+import Home from "pages/Home";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Buylist />} />
-        <Route path="/new" element={<CreateList />} />
+        <Route path="/" element={<Home />} />
 
         <Route
           path="*"
