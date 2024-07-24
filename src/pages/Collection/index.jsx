@@ -7,17 +7,15 @@ import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import qs from 'qs';
 import {
-  Button,
   Collapse,
   Container,
   Grid,
   Stack,
   Typography,
 } from '@mui/material';
-import { CloudUpload } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
 
 import ContactForm from './ContactForm';
+import Debug from './Debug';
 import { CardsExplorer } from './CardsExplorer';
 import { SetCompletion } from './SetCompletion';
 
@@ -28,17 +26,6 @@ import { parseSet, parseList, mergeCards, getStats } from './utils';
 
 import { DEFAULT_SET_STATS } from './constants';
 
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
 
 export default function SetProgressPage() {
   const reader = new FileReader();
@@ -50,7 +37,7 @@ export default function SetProgressPage() {
   const [cards, setCards] = useState([]);
   const [list, setList] = useState([]);
   const [isGift, setIsGift] = useState(false);
-  let stats = useData(`sets/${setCode}`) || DEFAULT_SET_STATS;
+  const stats = useData(`sets/${setCode}`) || DEFAULT_SET_STATS;
   const selected = cards?.filter((card) => card.selected);
   const total = selected?.reduce(
     (acc, card) => acc + parseFloat(card.prices.usd), 0
@@ -98,23 +85,8 @@ export default function SetProgressPage() {
     setCards(newList);
   }
 
-
-  const statsDebug = (<pre>{JSON.stringify(stats, null, 2) }</pre>);
-  const importButton = (
-    <Button
-      component="label"
-      role={undefined}
-      variant="contained"
-      tabIndex={-1}
-      startIcon={<CloudUpload />}
-      >
-      Import
-      <VisuallyHiddenInput type="file" onChange={handleFile} />
-    </Button>
-  );
   const rows = mergeCards({ cards, list });
   const missing = stats?.missing  || [];
-  if (debug) stats = getStats(rows);
 
   return (
     <Layout
@@ -151,9 +123,7 @@ export default function SetProgressPage() {
                     />
                   </Collapse>
 
-                  {debug && importButton}
-
-                  {debug && statsDebug}
+                  { debug &&  <Debug rows={rows} handleFile={handleFile} />}
                 </Stack>
               </Grid>
             </Grid>
