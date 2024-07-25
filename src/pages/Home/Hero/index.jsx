@@ -27,7 +27,7 @@ export default function Hero() {
         justifyContent="center"
       >
         <Grid item>
-        <Typography gutterBottom variant="h1">
+          <Typography gutterBottom variant="h1">
             TCGist
           </Typography>
           <Typography gutterBottom variant="h2">
