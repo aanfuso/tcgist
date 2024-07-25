@@ -1,4 +1,5 @@
 import {
+  Box,
   Container,
   Grid,
   Typography,
@@ -7,35 +8,51 @@ import {
 import TriggerButton from 'shared/components/TriggerButton';
 
 const SECTION_STYLES = {
+  backgroundImage: 'url(/heros/castle.jpg)',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  color: 'white',
   height: '100vh',
+  maskImage: 'linear-gradient(to top, transparent 1px, black 20%)',
   textAlign: {
     xs: 'center',
-    md: 'left',
+    sm: 'left',
   },
 };
 
 export default function Hero() {
   return (
-    <Container
+    <Box
       component="section"
       id="main"
       sx={SECTION_STYLES}
     >
-      <Grid container
-        direction="column"
-        height="100%"
-        justifyContent="center"
-      >
-        <Grid item>
-          <Typography gutterBottom variant="h1">
-            TCGist
-          </Typography>
-          <Typography gutterBottom variant="h2">
-            Collect, trade and play
-          </Typography>
-          <TriggerButton cta="Get Started Now" size="large" />
+      <Container sx={{ height: '100%' }}>
+        <Grid container
+          height="100%"
+          direction="column"
+          justifyContent="center"
+        >
+          <Grid item>
+            <Typography
+              gutterBottom
+              variant="h1"
+              sx={{ textShadow: '1px 1px 4px black;' }}
+            >
+              TCGist
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h2"
+              sx={{ textShadow: '1px 1px 4px black;' }}
+            >
+              Play, trade, collect
+            </Typography>
+            <TriggerButton cta="Get Started Now" size="large" />
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 };
