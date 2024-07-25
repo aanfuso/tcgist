@@ -22,7 +22,7 @@ import { SetCompletion } from './SetCompletion';
 import { getFullSet } from './requests';
 import { useData } from './hooks';
 
-import { parseSet, parseList, mergeCards, getStats } from './utils';
+import { parseSet, parseList, mergeCards } from './utils';
 
 import { DEFAULT_SET_STATS } from './constants';
 
