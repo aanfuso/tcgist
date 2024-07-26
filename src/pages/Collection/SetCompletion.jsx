@@ -18,47 +18,45 @@ export function SetCompletion(props) {
     <Card>
       <CardMedia
         component="img"
-        image="/sets/dmu.jpg"
+        image="/sets/dmu.webp"
         alt={set.name}
+        sx={{ p: 5 }}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {set.name}
-        </Typography>
-          {
-            STATS.map((stat) => {
-              if (!stats) return null;
+        {
+          STATS.map((stat) => {
+            if (!stats) return null;
 
-              const { label, symbol, color } = stat;
-              const { count, total, value } = stat && stats[label];
-              const icon = symbol ?
-                symbol : <StarsIcon style={{ color }} />;
+            const { label, symbol, color } = stat;
+            const { count, total, value } = stat && stats[label];
+            const icon = symbol ?
+              symbol : <StarsIcon style={{ color }} />;
 
-              return (
-                <Grid container key={label} spacing={2}>
-                  <Grid item>
-                    {icon}
-                  </Grid>
-                  <Grid item xs container>
-                    <Grid item xs container direction="column">
-                      <Grid item>
-                        <Typography variant="body2" color="text.secondary">
-                          {count}/{total}
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <LinearProgress
-                          color="success"
-                          variant="determinate"
-                          value={value}
-                        />
-                      </Grid>
+            return (
+              <Grid container key={label} spacing={2}>
+                <Grid item>
+                  {icon}
+                </Grid>
+                <Grid item xs container>
+                  <Grid item xs container direction="column">
+                    <Grid item>
+                      <Typography variant="body2" color="text.secondary">
+                        {count}/{total}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <LinearProgress
+                        color="success"
+                        variant="determinate"
+                        value={value}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>
-              );
-            })
-          }
+              </Grid>
+            );
+          })
+        }
       </CardContent>
     </Card>
   );
