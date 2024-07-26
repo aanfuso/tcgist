@@ -5,6 +5,7 @@ import {
   Grid,
   LinearProgress,
   Typography,
+  Tooltip,
 } from '@mui/material';
 import StarsIcon from '@mui/icons-material/Stars';
 
@@ -33,27 +34,29 @@ export default function SetCompletion(props) {
               symbol : <StarsIcon style={{ color }} />;
 
             return (
-              <Grid container key={label} spacing={2}>
-                <Grid item>
-                  {icon}
-                </Grid>
-                <Grid item xs container>
-                  <Grid item xs container direction="column">
-                    <Grid item>
-                      <Typography variant="body2" color="text.secondary">
-                        {count}/{total}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <LinearProgress
-                        color="success"
-                        variant="determinate"
-                        value={value}
-                      />
+              <Tooltip title={`Collecetd 1x of all ${label} card`} placement="left">
+                <Grid container key={label} spacing={2}>
+                  <Grid item>
+                    {icon}
+                  </Grid>
+                  <Grid item xs container>
+                    <Grid item xs container direction="column">
+                      <Grid item>
+                        <Typography variant="body2" color="text.secondary">
+                          {count}/{total}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <LinearProgress
+                          color="info"
+                          variant="determinate"
+                          value={value}
+                          />
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
+              </Tooltip>
             );
           })
         }
