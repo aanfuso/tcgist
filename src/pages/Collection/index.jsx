@@ -93,7 +93,7 @@ export default function SetProgressPage() {
       theme={base}
       footerProps={FOOTER_PROPS}
     >
-      <Container sx={{ pt: 4 }}>
+      <Container sx={{ pt: 4, mt: 10 }}>
         <Typography variant="h4">
           {set.name} Set Completion
         </Typography>
