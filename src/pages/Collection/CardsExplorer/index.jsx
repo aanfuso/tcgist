@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
-export function CardsExplorer(props) {
+export default function CardsExplorer(props) {
   const { rows, missing, onCardSelected } = props;
   const cards = rows?.filter((row) => missing.includes(row.collectorNumber));
 

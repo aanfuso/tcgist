@@ -16,7 +16,7 @@ import { FOOTER_PROPS, NAVIGATION_ITEMS } from 'shared/constants';
 
 import ContactForm from './ContactForm';
 import Debug from './Debug';
-import { CardsExplorer } from './CardsExplorer';
+import CardsExplorer from './CardsExplorer';
 import { SetCompletion } from './SetCompletion';
 
 import { getFullSet } from './requests';
