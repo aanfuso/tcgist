@@ -1,8 +1,3 @@
-import Layout from 'lib/components/Layout';
-
-import { base } from 'themes';
-import { FOOTER_PROPS } from 'shared/constants';
-
 import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import qs from 'qs';
@@ -13,6 +8,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+
+import Layout from 'lib/components/Layout';
+
+import { base } from 'themes';
+import { FOOTER_PROPS, NAVIGATION_ITEMS } from 'shared/constants';
 
 import ContactForm from './ContactForm';
 import Debug from './Debug';
@@ -92,6 +92,7 @@ export default function SetProgressPage() {
     <Layout
       theme={base}
       footerProps={FOOTER_PROPS}
+      navigation={NAVIGATION_ITEMS}
     >
       <Container sx={{ pt: 4, mt: 10 }}>
         <Typography variant="h4">
