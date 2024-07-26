@@ -18,7 +18,7 @@ export function SetCompletion(props) {
     <Card>
       <CardMedia
         component="img"
-        image="/sets/dmu.webp"
+        image={`/sets/${set.setCode}.webp`}
         alt={set.name}
         sx={{ p: 5 }}
       />
