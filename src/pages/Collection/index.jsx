@@ -30,7 +30,8 @@ import { DEFAULT_SET_STATS } from './constants';
 export default function SetProgressPage() {
   const reader = new FileReader();
   const { search } = useLocation();
-  const { setCode } = useParams();
+  const { setCode: actualSetCode } = useParams();
+  const setCode = 'dmu' || actualSetCode;
   const { debug } = qs.parse(search, { ignoreQueryPrefix: true });
 
   const [set, setSet] = useState({});
@@ -91,10 +92,11 @@ export default function SetProgressPage() {
   return (
     <Layout
       theme={base}
+      disableNavbar={true}
       footerProps={FOOTER_PROPS}
       navigation={NAVIGATION_ITEMS}
     >
-      <Container sx={{ pt: 4, mt: 10 }}>
+      <Container sx={{ pt: 4 }}>
         <Typography variant="h4">
           {set.name} Set Completion
         </Typography>

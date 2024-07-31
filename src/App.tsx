@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Home from "pages/Home";
 import Collection from "pages/Collection";
 
 
@@ -8,8 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/agu/mtg/:setCode" element={<Collection />} />
+        <Route path="/agu/mtg/dmu" element={<Collection />} />
 
         <Route
           path="*"

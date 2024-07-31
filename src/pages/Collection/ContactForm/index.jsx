@@ -49,7 +49,7 @@ export default function ContactForm({
         $ {total?.toFixed(2)}
       </Typography>
       <FormControlLabel
-        label="Make this a gift for the collectionist"
+        label="Make it a gift"
         control={
           <Checkbox
             onChange={toggleGift}
