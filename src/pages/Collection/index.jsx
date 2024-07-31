@@ -112,7 +112,13 @@ export default function SetProgressPage() {
           <Grid item xs={4}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <SetCompletion set={set} stats={stats} />
+                <SetCompletion
+                  missing={missing}
+                  rows={rows}
+                  set={set}
+                  stats={stats}
+                  total={total}
+                />
               </Grid>
 
               <Grid item xs={12}>
