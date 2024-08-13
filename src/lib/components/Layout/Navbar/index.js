@@ -8,7 +8,7 @@ import {
   Toolbar,
 } from '@mui/material';
 
-import ScrollTranformation from './ScrollTranformation';
+import ScrollTransformation from './ScrollTransformation';
 import MenuDrawer from './MenuDrawer';
 
 
@@ -16,6 +16,7 @@ function Bar(props) {
   const {
     appBarStyles,
     navigation = [],
+    logo,
   } = props;
 
   return (
@@ -27,7 +28,7 @@ function Bar(props) {
               href="/"
               underline="none"
             >
-              Logo
+              {logo}
             </Link>
           </Box>
 
@@ -53,9 +54,9 @@ function Bar(props) {
 };
 
 const Navbar = (props) => (
-  <ScrollTranformation>
+  <ScrollTransformation>
     <Bar {...props} />
-  </ScrollTranformation>
+  </ScrollTransformation>
 );
 
 export default Navbar;
