@@ -8,12 +8,13 @@ export default function Card(props) {
     price,
     rarity,
     selected,
+    onClick,
   } = props;
 
   const ownedStyles = selected ? {} : { opacity: 0.5 };
 
   return (
-    <Box m={1}>
+    <Box m={1} onClick={onClick}>
       <img
         src={image}
         style={{ width: '100%', cursor: 'pointer', ...ownedStyles }}

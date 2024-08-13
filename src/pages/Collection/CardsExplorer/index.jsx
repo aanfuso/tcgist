@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
+import Card from 'components/Card';
+
 export default function CardsExplorer(props) {
   const { rows, missing, onCardSelected } = props;
   const cards = rows?.filter((row) => missing.includes(row.collectorNumber));
@@ -11,18 +13,11 @@ export default function CardsExplorer(props) {
 
       return (
         <Grid xs={6} sm={4} md={3} key={row.id}>
-          <img
-            src={row.image}
-            style={{ width: '100%', cursor: 'pointer', ...ownedStyles }}
-            alt={row.name}
-            onClick={() => onCardSelected(row) }
+          <Card
+            {...row}
+            onClick={() => onCardSelected(row)}
+            sx={ownedStyles}
           />
-          <Typography variant="body2" color="text.secondary">
-            {row.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            #{row.collectorNumber} {row.rarity} (${row.price})
-          </Typography>
         </Grid>
      )
     })
@@ -45,7 +40,7 @@ export default function CardsExplorer(props) {
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       sx={{ height: '85vh', overflow: 'auto' }}
     >
-      {!cards?.length ? noCardsMessage : collection}
+      {cards?.length ? collection : noCardsMessage}
     </Grid>
   );
 }
