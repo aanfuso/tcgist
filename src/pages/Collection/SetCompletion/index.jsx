@@ -20,7 +20,9 @@ export default function SetCompletion(props) {
   const cards = rows?.filter((row) => missing.includes(row.collectorNumber));
   const handleMessage = () => {
     const list = cards
+      .sort((a, b) => a.collectorNumber - b.collectorNumber)
       .map((card) => `- ${card.name} #${card.collectorNumber} ($${card.price})`)
+      .slice(0, 10)
       .join('\n');
     const message = `I'm looking for these cards from Dominaria United: \n\n${list}\n\nWould you check if you have any of them? \nVisual spoiler: https://tcgist.pages.dev/agu/mtg/dmu`;
     const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
