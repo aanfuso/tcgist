@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import qs from 'qs';
 import {
+  Button,
   Collapse,
   Container,
   Grid,
@@ -10,15 +11,25 @@ import {
 } from '@mui/material';
 
 import Layout from 'lib/components/Layout';
+import { logAnalyticsEvent } from 'lib/firebase/analytics';
+import { db } from 'lib/firebase';
+import {
+  child,
+  get,
+  ref,
+  set as dbSet,
+ } from 'firebase/database';
 
 import { base } from 'themes';
 import { Logo } from 'shared/icons';
-import { FOOTER_PROPS, NAVIGATION_ITEMS } from 'shared/constants';
+import { FOOTER_PROPS } from 'shared/constants';
 
 import ContactForm from './ContactForm';
 import Debug from './Debug';
 import CardsExplorer from './CardsExplorer';
 import SetCompletion from './SetCompletion';
+
+import SubscribeDialog from 'components/SubscribeDialog';
 
 import { getFullSet } from './requests';
 import { useData } from './hooks';
@@ -39,6 +50,8 @@ export default function SetProgressPage() {
   const [cards, setCards] = useState([]);
   const [list, setList] = useState([]);
   const [isGift, setIsGift] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const stats = useData(`sets/${setCode}`) || DEFAULT_SET_STATS;
   const selected = cards?.filter((card) => card.selected);
   const total = selected?.reduce(
@@ -68,6 +81,32 @@ export default function SetProgressPage() {
     reader.readAsText(files[0]);
   }
 
+  const handleSubmit = (email) => {
+    const dbRef = ref(db);
+    let emails = [];
+
+    get(child(dbRef, 'users/tcgist')).then((snapshot) => {
+      if (snapshot.exists()) {
+        emails = [...snapshot.val(), email];
+        dbSet(ref(db, 'users/tcgist'), emails)
+      } else {
+        dbSet(ref(db, 'users/tcgist'), [email])
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
+  const handleOpen = () => {
+    logAnalyticsEvent('click', { label: 'Try TCGist' })
+
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const toggleGift = (e) => {
     const selected = e.target.checked;
 
@@ -93,11 +132,25 @@ export default function SetProgressPage() {
   return (
     <Layout
       theme={base}
-      logo={<Logo />}
       footerProps={FOOTER_PROPS}
-      navigation={NAVIGATION_ITEMS}
+      navbarProps={{
+        logo: (<Logo />),
+        right: (
+          <Button
+            variant="contained"
+            onClick={handleOpen}
+          >
+            Try TCGist
+          </Button>
+        )
+      }}
     >
       <Container sx={{ pt: 15 }}>
+        <SubscribeDialog
+          open={open}
+          handleClose={handleClose}
+          handleSubmit={handleSubmit}
+        />
         <Typography variant="h4">
           {set.name} Set Completion
         </Typography>
