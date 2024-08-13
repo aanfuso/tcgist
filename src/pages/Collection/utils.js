@@ -185,18 +185,18 @@ export const mergeCards = ({ cards, list }) => {
     };
 
     return {
-      id: card.id,
       collected: inCollection,
       collectorNumber: card.collector_number,
       colors: card.colors,
+      foilQty,
+      id: card.id,
       image: card.image_uris?.normal,
       name: card.name,
+      owned: (regularQty + foilQty) > 0,
+      price: card.prices.usd,
       rarity: rarityToValue[card.rarity],
       regularQty,
-      foilQty,
-      owned: (regularQty + foilQty) > 0,
       selected: card.selected,
-      price: card.prices.usd,
     };
   });
 };

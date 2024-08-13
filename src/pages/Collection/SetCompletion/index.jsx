@@ -15,9 +15,8 @@ import { STATS }  from '../constants';
 
 
 export default function SetCompletion(props) {
-  const { set, stats, rows, missing} = props;
+  const { set, stats, rows, missing } = props;
 
-  console.log(rows)
   const cards = rows?.filter((row) => missing.includes(row.collectorNumber));
   const handleMessage = () => {
     const list = cards
