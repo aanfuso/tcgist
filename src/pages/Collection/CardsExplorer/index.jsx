@@ -10,7 +10,7 @@ export default function CardsExplorer(props) {
       const ownedStyles = row.selected ? {} : { opacity: 0.5 }
 
       return (
-        <Grid xs={3} key={row.id}>
+        <Grid xs={6} sm={4} md={3} key={row.id}>
           <img
             src={row.image}
             style={{ width: '100%', cursor: 'pointer', ...ownedStyles }}

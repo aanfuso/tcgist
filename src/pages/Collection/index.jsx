@@ -102,15 +102,7 @@ export default function SetProgressPage() {
           {set.name} Set Completion
         </Typography>
         <Grid container spacing={4} py={3}>
-          <Grid item xs={8}>
-            <CardsExplorer
-              rows={rows}
-              missing={missing}
-              onCardSelected={handleSelected}
-            />
-          </Grid>
-
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={5} md={4}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <SetCompletion
@@ -137,6 +129,14 @@ export default function SetProgressPage() {
                 </Stack>
               </Grid>
             </Grid>
+          </Grid>
+
+          <Grid item xs={12} sm={7} md={8}>
+            <CardsExplorer
+              rows={rows}
+              missing={missing}
+              onCardSelected={handleSelected}
+            />
           </Grid>
         </Grid>
       </Container>
