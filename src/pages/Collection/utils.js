@@ -69,6 +69,8 @@ export const parseCard = (cardData) => {
   return {
     name: cardData.name,
     collectorNumber: cardData.collector_number,
+    image: cardData.image_uris?.png,
+    price: cardData.prices.usd,
   };
 };
 

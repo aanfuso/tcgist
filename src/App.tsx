@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Collection from "pages/Collection";
+import NewCollection from "pages/NewCollection";
 
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/agu/mtg/dmu" element={<Collection />} />
+        <Route path="/agu/mtg/:setCode" element={<Collection />} />
+        <Route path="/agu/mtg/:setCode/new" element={<NewCollection />} />
 
         <Route
           path="*"
