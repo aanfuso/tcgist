@@ -12,6 +12,7 @@ import {
 import Layout from 'lib/components/Layout';
 
 import { base } from 'themes';
+import { Logo } from 'shared/icons';
 import { FOOTER_PROPS, NAVIGATION_ITEMS } from 'shared/constants';
 
 import ContactForm from './ContactForm';
@@ -92,11 +93,11 @@ export default function SetProgressPage() {
   return (
     <Layout
       theme={base}
-      disableNavbar={true}
+      logo={<Logo />}
       footerProps={FOOTER_PROPS}
       navigation={NAVIGATION_ITEMS}
     >
-      <Container sx={{ pt: 4 }}>
+      <Container sx={{ pt: 15 }}>
         <Typography variant="h4">
           {set.name} Set Completion
         </Typography>
