@@ -17,6 +17,8 @@ function Bar(props) {
     appBarStyles,
     navigation = [],
     logo,
+    right,
+    left,
   } = props;
 
   return (
@@ -30,6 +32,7 @@ function Bar(props) {
             >
               {logo}
             </Link>
+            {left}
           </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' }}}>
@@ -43,6 +46,7 @@ function Bar(props) {
                   {text}
                 </Button>
               ))}
+              {right}
             </Stack>
           </Box>
 

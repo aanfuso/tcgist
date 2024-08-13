@@ -10,10 +10,11 @@ const Layout = (props) => {
     children,
     theme,
     disableNavbar,
+    navbarProps,
     footerProps,
   } = props;
 
-  const navbarComponent = disableNavbar ? null : <Navbar {...props}/>;
+  const navbarComponent = disableNavbar ? null : <Navbar {...navbarProps}/>;
 
   return (
     <ThemeProvider theme={theme}>
