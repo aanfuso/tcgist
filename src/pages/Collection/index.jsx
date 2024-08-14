@@ -12,13 +12,6 @@ import {
 
 import Layout from 'lib/components/Layout';
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
-import { db } from 'lib/firebase';
-import {
-  child,
-  get,
-  ref,
-  set as dbSet,
- } from 'firebase/database';
 
 import { base } from 'themes';
 import { Logo } from 'shared/icons';
@@ -28,8 +21,6 @@ import ContactForm from './ContactForm';
 import Debug from './Debug';
 import CardsExplorer from './CardsExplorer';
 import SetCompletion from './SetCompletion';
-
-import SubscribeDialog from 'components/SubscribeDialog';
 
 import { getFullSet } from './requests';
 import { useData } from './hooks';
@@ -49,7 +40,6 @@ export default function SetProgressPage() {
   const [set, setSet] = useState({});
   const [cards, setCards] = useState([]);
   const [list, setList] = useState([]);
-  const [open, setOpen] = useState(false);
 
   const stats = useData(`sets/${setCode}`) || DEFAULT_SET_STATS;
   const selected = cards?.filter((card) => card.selected);
@@ -80,32 +70,6 @@ export default function SetProgressPage() {
     reader.readAsText(files[0]);
   }
 
-  const handleSubmit = (email) => {
-    const dbRef = ref(db);
-    let emails = [];
-
-    get(child(dbRef, 'users/tcgist')).then((snapshot) => {
-      if (snapshot.exists()) {
-        emails = [...snapshot.val(), email];
-        dbSet(ref(db, 'users/tcgist'), emails)
-      } else {
-        dbSet(ref(db, 'users/tcgist'), [email])
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  };
-
-  const handleOpen = () => {
-    logAnalyticsEvent('click', { label: 'Try TCGist' })
-
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleSelected = (card) => {
     const newList = cards.map((row) => {
       if (row.collector_number === card.collectorNumber) {
@@ -132,6 +96,7 @@ export default function SetProgressPage() {
           <Button
             href="https://szk4u.mjt.lu/wgt/szk4u/xu59/form?c=0799e44b"
             variant="contained"
+            onClick={() => logAnalyticsEvent('click', { label: 'Try TCGist' })}
           >
             Try TCGist
           </Button>

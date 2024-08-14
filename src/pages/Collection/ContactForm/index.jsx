@@ -1,12 +1,7 @@
-import {
-  Favorite,
-  WhatsApp,
-} from '@mui/icons-material';
+import { WhatsApp } from '@mui/icons-material';
 
 import {
   Button,
-  Checkbox,
-  FormControlLabel,
   FormGroup,
   Typography,
 } from '@mui/material';
