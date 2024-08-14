@@ -13,7 +13,7 @@ const TRADE_CONFIG = {
   },
   sell: {
     rowFormat: (card) => `- ${card.name} ($${card.prices.usd})`,
-    closeLine: (total) => `Are you interested in *buying* them? It's ${total.toFixed(2)}. Thank you!`,
+    closeLine: (total) => `Are you interested in *buying* them? It's $${total.toFixed(2)}. Thank you!`,
   },
 };
 
