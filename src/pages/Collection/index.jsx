@@ -95,6 +95,7 @@ export default function SetProgressPage() {
         right: (
           <Button
             href="https://szk4u.mjt.lu/wgt/szk4u/xu59/form?c=0799e44b"
+            target="_blank"
             variant="contained"
             onClick={() => logAnalyticsEvent('click', { label: 'Try TCGist' })}
           >
