@@ -137,8 +137,8 @@ export default function SetProgressPage() {
         logo: (<Logo />),
         right: (
           <Button
+            href="https://szk4u.mjt.lu/wgt/szk4u/xu59/form?c=0799e44b"
             variant="contained"
-            onClick={handleOpen}
           >
             Try TCGist
           </Button>
@@ -146,11 +146,6 @@ export default function SetProgressPage() {
       }}
     >
       <Container sx={{ pt: 15 }}>
-        <SubscribeDialog
-          open={open}
-          handleClose={handleClose}
-          handleSubmit={handleSubmit}
-        />
         <Typography variant="h4">
           {set.name} Set Completion
         </Typography>
