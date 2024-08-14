@@ -26,7 +26,6 @@ export default function ContactForm({
   selected,
   total,
   isGift,
-  toggleGift,
 }) {
 
   const handleMessage = () => {
@@ -45,20 +44,9 @@ export default function ContactForm({
       <Typography variant="subtitle2">
         {selected?.length} cards selected
       </Typography>
-      <Typography variant="subtitle2">
+      <Typography gutterBottom variant="subtitle2">
         $ {total?.toFixed(2)}
       </Typography>
-      <FormControlLabel
-        label="Make it a gift"
-        control={
-          <Checkbox
-            onChange={toggleGift}
-            color="secondary"
-            checked={isGift}
-            checkedIcon={<Favorite />}
-          />
-        }
-      />
       <Button
         component="label"
         variant="contained"

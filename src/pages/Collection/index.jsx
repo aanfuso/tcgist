@@ -49,7 +49,6 @@ export default function SetProgressPage() {
   const [set, setSet] = useState({});
   const [cards, setCards] = useState([]);
   const [list, setList] = useState([]);
-  const [isGift, setIsGift] = useState(false);
   const [open, setOpen] = useState(false);
 
   const stats = useData(`sets/${setCode}`) || DEFAULT_SET_STATS;
@@ -107,12 +106,6 @@ export default function SetProgressPage() {
     setOpen(false);
   };
 
-  const toggleGift = (e) => {
-    const selected = e.target.checked;
-
-    setIsGift(selected);
-  }
-
   const handleSelected = (card) => {
     const newList = cards.map((row) => {
       if (row.collector_number === card.collectorNumber) {
@@ -168,8 +161,7 @@ export default function SetProgressPage() {
                     <ContactForm
                       selected={selected}
                       total={total}
-                      isGift={isGift}
-                      toggleGift={toggleGift}
+                      isGift={false}
                     />
                   </Collapse>
 
