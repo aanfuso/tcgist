@@ -1,34 +1,19 @@
 import {
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Grid,
-  IconButton,
   LinearProgress,
   Typography,
   Tooltip,
 } from '@mui/material';
-import { Share, Stars } from '@mui/icons-material';
+import { Stars } from '@mui/icons-material';
 
 import { STATS }  from '../constants';
 
 
 export default function SetCompletion(props) {
-  const { set, stats, rows, missing } = props;
-
-  const cards = rows?.filter((row) => missing.includes(row.collectorNumber));
-  const handleMessage = () => {
-    const list = cards
-      .sort((a, b) => a.collectorNumber - b.collectorNumber)
-      .map((card) => `- ${card.name} #${card.collectorNumber}`)
-      .slice(0, 10)
-      .join('\n');
-    const message = `Heyo! I'm looking for these cards from Dominaria United: \n\n${list}\n\nWould you check if you have any of them? \nMore: https://tcgist.pages.dev/agu/mtg/dmu`;
-    const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
-
-    window.open(url, '_blank');
-  }
+  const { set, stats } = props;
 
   return (
     <Card>
@@ -39,11 +24,6 @@ export default function SetCompletion(props) {
         alt={set.name}
         sx={{ p: 5 }}
       />
-      <CardActions disableSpacing>
-        <IconButton aria-label="share" onClick={handleMessage}>
-          <Share />
-        </IconButton>
-      </CardActions>
       <CardContent>
         {
           STATS.map((stat) => {
