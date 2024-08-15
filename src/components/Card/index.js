@@ -16,7 +16,7 @@ export default function Card(props) {
   return (
     <Box m={1} onClick={onClick}>
       <img
-        src={image}
+        src={image || '/defaults/card-back.png'}
         style={{ width: '100%', cursor: 'pointer', ...ownedStyles }}
         alt={name}
       />
