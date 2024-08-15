@@ -39,6 +39,7 @@ export default function SetCompletion(props) {
                 key={label}
                 title={`Collecetd 1x of all ${label} card`}
                 placement="left"
+                style={{ cursor: 'pointer' }}
               >
                 <Grid container spacing={2}>
                   <Grid item>
