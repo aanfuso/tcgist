@@ -24,7 +24,7 @@ export default function SetCompletion(props) {
       .map((card) => `- ${card.name} #${card.collectorNumber}`)
       .slice(0, 10)
       .join('\n');
-    const message = `I'm looking for these cards from Dominaria United: \n\n${list}\n\nWould you check if you have any of them? \nVisual spoiler: https://tcgist.pages.dev/agu/mtg/dmu`;
+    const message = `Heyo! I'm looking for these cards from Dominaria United: \n\n${list}\n\nWould you check if you have any of them? \nMore: https://tcgist.pages.dev/agu/mtg/dmu`;
     const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
 
     window.open(url, '_blank');
