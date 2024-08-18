@@ -70,8 +70,11 @@ export const parseCard = (cardData) => {
   return {
     name: cardData.name,
     collectorNumber: cardData.collector_number,
+    colors: cardData.colors || [],
+    id: cardData.id,
     image: cardData.image_uris?.png,
     price: cardData.prices.usd,
+    rarity: RARITY_TO_VALUE[cardData.rarity],
   };
 };
 
