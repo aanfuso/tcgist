@@ -8,17 +8,17 @@ import {
   Typography,
 } from '@mui/material';
 
-import Card from 'components/Card';
-import { useDebug, useSet } from 'hooks';
-
 import Layout from 'lib/components/Layout';
-import SetCompletion from 'pages/Collection/SetCompletion';
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
-
 
 import { base } from 'themes';
 import { Logo } from 'shared/icons';
 import { FOOTER_PROPS } from 'shared/constants';
+
+import Card from 'components/Card';
+import SetCompletion from 'pages/Collection/SetCompletion';
+
+import { useDebug, useSet } from 'hooks';
 
 import { getStats } from '../Collection/utils';
 
