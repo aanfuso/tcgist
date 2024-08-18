@@ -60,7 +60,7 @@ export default function NewCollection() {
     >
       <Container sx={{ pt: 15 }}>
         <Typography variant="h4">
-          {set.name} Set Completion
+          {set.name}
         </Typography>
         <Grid container spacing={4} py={3} >
           {cards?.map((card) => (
