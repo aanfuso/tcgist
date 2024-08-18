@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import qs from 'qs';
+import { useParams } from 'react-router-dom';
 import {
   Button,
   Collapse,
@@ -28,14 +27,14 @@ import { useData } from './hooks';
 import { parseSet, parseList, mergeCards } from './utils';
 
 import { DEFAULT_SET_STATS } from './constants';
+import { useDebug } from 'hooks';
 
 
 export default function SetProgressPage() {
   const reader = new FileReader();
-  const { search } = useLocation();
   const { setCode: actualSetCode } = useParams();
   const setCode = 'dmu' || actualSetCode;
-  const { debug } = qs.parse(search, { ignoreQueryPrefix: true });
+  const debug = useDebug();
 
   const [set, setSet] = useState({});
   const [cards, setCards] = useState([]);

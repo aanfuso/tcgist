@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import qs from 'qs';
+import { useParams } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -11,6 +10,7 @@ import {
 } from '@mui/material';
 
 import Card from 'components/Card';
+import { useDebug } from 'hooks';
 import Layout from 'lib/components/Layout';
 import SetCompletion from 'pages/Collection/SetCompletion';
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
@@ -26,8 +26,8 @@ import { getFullSet } from '../Collection/requests';
 
 
 export default function NewCollection() {
-  const { search } = useLocation();
-  const { debug } = qs.parse(search, { ignoreQueryPrefix: true });
+
+  const debug = useDebug()
   const { setCode } = useParams();
 
   const [set, setSet] = useState({});
