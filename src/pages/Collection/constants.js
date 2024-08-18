@@ -129,3 +129,10 @@ export const STATS = [
   STAT_GREEN,
   STAT_COLORLESS,
 ];
+
+export const RARITY_TO_VALUE = {
+  [COMMON]: 'C',
+  [UNCOMMON]: 'U',
+  [RARE]: 'R',
+  [MYTHIC]: 'M',
+};

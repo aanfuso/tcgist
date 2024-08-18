@@ -10,6 +10,7 @@ import {
   GREEN,
   COLORLESS,
   MISSING,
+  RARITY_TO_VALUE,
 } from "./constants";
 
 export const parseList = (text) => {
@@ -179,13 +180,6 @@ export const mergeCards = ({ cards, list }) => {
       }, [0, 0]);
     }
 
-    const rarityToValue = {
-      common: 'C',
-      uncommon: 'U',
-      rare: 'R',
-      mythic: 'M',
-    };
-
     return {
       collected: inCollection,
       collectorNumber: card.collector_number,
@@ -196,7 +190,7 @@ export const mergeCards = ({ cards, list }) => {
       name: card.name,
       owned: (regularQty + foilQty) > 0,
       price: card.prices.usd,
-      rarity: rarityToValue[card.rarity],
+      rarity: RARITY_TO_VALUE[card.rarity],
       regularQty,
       selected: card.selected,
     };
