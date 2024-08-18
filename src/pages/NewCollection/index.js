@@ -11,6 +11,7 @@ import {
 
 import Card from 'components/Card';
 import Layout from 'lib/components/Layout';
+import SetCompletion from 'pages/Collection/SetCompletion';
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
 
 
@@ -18,7 +19,7 @@ import { base } from 'themes';
 import { Logo } from 'shared/icons';
 import { FOOTER_PROPS } from 'shared/constants';
 
-import { parseSet, parseCard } from '../Collection/utils';
+import { parseSet, parseCard, getStats } from '../Collection/utils';
 
 import { getFullSet } from '../Collection/requests';
 
@@ -52,6 +53,8 @@ export default function NewCollection() {
     setCards(newList);
   }
 
+  const stats = getStats(cards);
+
   return (
     <Layout
       theme={base}
@@ -74,22 +77,39 @@ export default function NewCollection() {
         <Typography variant="h4">
           {set.name}
         </Typography>
-        <Grid container spacing={4} py={3} >
-          {cards?.map((card) => (
-            <Grid item xs={3} key={card.collectorNumber}>
-              <Stack spacing={1}>
-                <Card {...card} selected={card.count > 0} />
-                <Input
-                  onChange={(e) => handleCountChange(e.target.value, card)}
-                  size="sm"
-                  placeholder="Quantity"
-                  type="number"
-                  variant="soft"
-                  min={0}
+        <Grid container spacing={4} py={3}>
+          <Grid item xs={12} sm={5} md={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <SetCompletion
+                  set={set}
+                  stats={stats}
                 />
-              </Stack>
+              </Grid>
+              <Grid item xs={12}>
+              </Grid>
             </Grid>
-          ))}
+          </Grid>
+
+          <Grid item xs={12} sm={7} md={8}>
+            <Grid container spacing={4} py={3}>
+              {cards?.map((card) => (
+                <Grid item xs={3} key={card.collectorNumber}>
+                  <Stack spacing={1}>
+                    <Card {...card} selected={card.count > 0} />
+                    <Input
+                      onChange={(e) => handleCountChange(e.target.value, card)}
+                      size="sm"
+                      placeholder="Quantity"
+                      type="number"
+                      variant="soft"
+                      min={0}
+                    />
+                  </Stack>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
         </Grid>
       </Container>
     </Layout>
