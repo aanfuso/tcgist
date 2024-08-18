@@ -8,19 +8,14 @@ export default function CardsExplorer(props) {
   const cards = rows?.filter((row) => missing.includes(row.collectorNumber));
 
   const collection = (
-    cards?.map((row) => {
-      const ownedStyles = row.selected ? {} : { opacity: 0.5 }
-
-      return (
-        <Grid xs={6} sm={4} md={3} key={row.id}>
-          <Card
-            {...row}
-            onClick={() => onCardSelected(row)}
-            sx={ownedStyles}
-          />
-        </Grid>
-     )
-    })
+    cards?.map((row) => (
+      <Grid xs={6} sm={4} md={3} key={row.id}>
+        <Card
+          {...row}
+          onClick={() => onCardSelected(row)}
+        />
+      </Grid>
+    ))
   );
 
   const noCardsMessage = (
