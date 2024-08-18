@@ -21,7 +21,7 @@ import Debug from './Debug';
 import CardsExplorer from './CardsExplorer';
 import SetCompletion from './SetCompletion';
 
-import { getFullSet } from './requests';
+import { getFullSet } from 'requests';
 import { useData } from './hooks';
 
 import { parseSet, parseList, mergeCards } from './utils';

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Button,
@@ -10,7 +9,8 @@ import {
 } from '@mui/material';
 
 import Card from 'components/Card';
-import { useDebug } from 'hooks';
+import { useDebug, useSet } from 'hooks';
+
 import Layout from 'lib/components/Layout';
 import SetCompletion from 'pages/Collection/SetCompletion';
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
@@ -20,29 +20,13 @@ import { base } from 'themes';
 import { Logo } from 'shared/icons';
 import { FOOTER_PROPS } from 'shared/constants';
 
-import { parseSet, parseCard, getStats } from '../Collection/utils';
-
-import { getFullSet } from '../Collection/requests';
+import { getStats } from '../Collection/utils';
 
 
 export default function NewCollection() {
-
   const debug = useDebug()
   const { setCode } = useParams();
-
-  const [set, setSet] = useState({});
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    fetch(`https://api.scryfall.com/sets/${setCode}`)
-      .then((response) => response.json())
-      .then(parseSet)
-      .then(setSet);
-
-    getFullSet(setCode)
-      .then(({data}) => data.map(parseCard))
-      .then(setCards);
-  }, [setCode]);
+  const { set, cards, setCards } = useSet(setCode);
 
   const handleCountChange = (quantity, card, type) => {
     const newList = cards.map((c) => {
