@@ -34,7 +34,7 @@ export default function Debug({ rows, handleFile }) {
         <VisuallyHiddenInput type="file" onChange={handleFile} />
       </Button>
 
-      <pre>{JSON.stringify(stats, null, 2) }</pre>);
+      <pre>{JSON.stringify(stats, null, 2) }</pre>
     </>
   );
 }

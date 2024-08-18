@@ -81,8 +81,7 @@ export default function SetProgressPage() {
     setCards(newList);
   }
 
-  const rows = mergeCards({ cards, list });
-  const missing = stats?.missing  || [];
+  const missing = stats?.missing || [];
 
   return (
     <Layout
@@ -111,11 +110,8 @@ export default function SetProgressPage() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <SetCompletion
-                  missing={missing}
-                  rows={rows}
                   set={set}
                   stats={stats}
-                  total={total}
                 />
               </Grid>
 
