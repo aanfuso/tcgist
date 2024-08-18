@@ -32,8 +32,7 @@ import { useDebug } from 'hooks';
 
 export default function SetProgressPage() {
   const reader = new FileReader();
-  const { setCode: actualSetCode } = useParams();
-  const setCode = 'dmu' || actualSetCode;
+  const { setCode } = useParams();
   const debug = useDebug();
 
   const [set, setSet] = useState({});
