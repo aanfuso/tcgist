@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Button,
@@ -17,27 +16,18 @@ import { Logo } from 'shared/icons';
 import { FOOTER_PROPS } from 'shared/constants';
 
 import ContactForm from './ContactForm';
-import Debug from './Debug';
 import CardsExplorer from './CardsExplorer';
 import SetCompletion from './SetCompletion';
 
-import { getFullSet } from 'requests';
 import { useData } from './hooks';
-
-import { parseSet, parseList, mergeCards } from './utils';
+import { useSet } from 'hooks';
 
 import { DEFAULT_SET_STATS } from './constants';
-import { useDebug } from 'hooks';
 
 
 export default function SetProgressPage() {
-  const reader = new FileReader();
   const { setCode } = useParams();
-  const debug = useDebug();
-
-  const [set, setSet] = useState({});
-  const [cards, setCards] = useState([]);
-  const [list, setList] = useState([]);
+  const { set, cards, setCards } = useSet(setCode);
 
   const stats = useData(`sets/${setCode}`) || DEFAULT_SET_STATS;
   const selected = cards?.filter((card) => card.selected);
@@ -45,32 +35,9 @@ export default function SetProgressPage() {
     (acc, card) => acc + parseFloat(card.prices.usd), 0
   );
 
-  useEffect(() => {
-    fetch(`https://api.scryfall.com/sets/${setCode}`)
-      .then((response) => response.json())
-      .then(parseSet)
-      .then(setSet);
-
-    getFullSet(setCode)
-      .then(({ data }) => setCards(data));
-  }, [setCode]);
-
-  reader.onload = function(e) {
-    const text = e.target.result;
-    const parsed = parseList(text).slice(1);
-
-    setList(parsed);
-  }
-
-  const handleFile = (e) => {
-    const files = Array.from(e.target.files);
-
-    reader.readAsText(files[0]);
-  }
-
   const handleSelected = (card) => {
     const newList = cards.map((row) => {
-      if (row.collector_number === card.collectorNumber) {
+      if (row.collectorNumber === card.collectorNumber) {
 
         return { ...row, selected: !row.selected };
       }
@@ -124,8 +91,6 @@ export default function SetProgressPage() {
                       isGift={false}
                     />
                   </Collapse>
-
-                  { debug && <Debug rows={rows} handleFile={handleFile} />}
                 </Stack>
               </Grid>
             </Grid>
@@ -133,7 +98,7 @@ export default function SetProgressPage() {
 
           <Grid item xs={12} sm={7} md={8}>
             <CardsExplorer
-              rows={rows}
+              rows={cards}
               missing={missing}
               onCardSelected={handleSelected}
             />
