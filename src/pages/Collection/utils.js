@@ -73,7 +73,7 @@ export const parseCard = (cardData) => {
     colors: cardData.colors || [],
     id: cardData.id,
     image: cardData.image_uris?.png,
-    price: cardData.prices.usd,
+    prices: cardData.prices,
     rarity: RARITY_TO_VALUE[cardData.rarity],
   };
 };

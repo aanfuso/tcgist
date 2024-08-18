@@ -5,7 +5,7 @@ export default function Card(props) {
     collectorNumber,
     image,
     name,
-    price,
+    prices,
     rarity,
     selected,
     onClick,
@@ -24,7 +24,7 @@ export default function Card(props) {
         {name}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        #{collectorNumber} {rarity} (${price})
+        #{collectorNumber} {rarity} (${prices.usd})
       </Typography>
     </Box>
   );
