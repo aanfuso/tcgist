@@ -44,21 +44,21 @@ export default function NewCollection() {
       .then(setCards);
   }, [setCode]);
 
-  const handleCountChange = (quantity, card) => {
+  const handleCountChange = (quantity, card, type) => {
     const newList = cards.map((c) => {
       if (c.collectorNumber === card.collectorNumber) {
         return {
           ...c,
           collected: quantity > 0,
-          regularQty: quantity
+          [`${type}Qty`]: quantity,
         };
       }
-
       return c;
     });
 
     setCards(newList);
-  }
+  };
+
 
   const stats = getStats(cards);
 
@@ -106,9 +106,17 @@ export default function NewCollection() {
                   <Stack spacing={1}>
                     <Card {...card} selected={card.regularQty > 0} />
                     <Input
-                      onChange={(e) => handleCountChange(e.target.value, card)}
+                      onChange={(e) => handleCountChange(e.target.value, card, 'regular')}
                       size="sm"
-                      placeholder="Quantity"
+                      placeholder="Regular Quantity"
+                      type="number"
+                      variant="soft"
+                      min={0}
+                    />
+                    <Input
+                      onChange={(e) => handleCountChange(e.target.value, card, 'foil')}
+                      size="sm"
+                      placeholder="Foil Quantity"
                       type="number"
                       variant="soft"
                       min={0}
