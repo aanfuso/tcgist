@@ -40,6 +40,18 @@ export default function NewCollection() {
       .then(setCards);
   }, [setCode]);
 
+  const handleCountChange = (quantity, card) => {
+    const newList = cards.map((c) => {
+      if (c.collectorNumber === card.collectorNumber) {
+        return {...c, count: quantity};
+      }
+
+      return c;
+    });
+
+    setCards(newList);
+  }
+
   return (
     <Layout
       theme={base}
@@ -66,8 +78,9 @@ export default function NewCollection() {
           {cards?.map((card) => (
             <Grid item xs={3} key={card.collectorNumber}>
               <Stack spacing={1}>
-                <Card {...card} />
+                <Card {...card} selected={card.count > 0} />
                 <Input
+                  onChange={(e) => handleCountChange(e.target.value, card)}
                   size="sm"
                   placeholder="Quantity"
                   type="number"
