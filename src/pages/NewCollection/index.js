@@ -72,7 +72,7 @@ export default function NewCollection() {
                   placeholder="Quantity"
                   type="number"
                   variant="soft"
-                  minValue={0}
+                  min={0}
                 />
               </Stack>
             </Grid>
