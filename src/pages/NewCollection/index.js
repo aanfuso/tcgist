@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  Button,
   Container,
   Grid,
   Input,
@@ -10,9 +11,12 @@ import {
 
 import Card from 'components/Card';
 import Layout from 'lib/components/Layout';
+import { logAnalyticsEvent } from 'lib/firebase/analytics';
+
 
 import { base } from 'themes';
-import { FOOTER_PROPS, NAVIGATION_ITEMS } from 'shared/constants';
+import { Logo } from 'shared/icons';
+import { FOOTER_PROPS } from 'shared/constants';
 
 import { parseSet, parseCard } from '../Collection/utils';
 
@@ -39,15 +43,26 @@ export default function NewCollection() {
   return (
     <Layout
       theme={base}
-      logo={'LOGOOOO'}
       footerProps={FOOTER_PROPS}
-      navigation={NAVIGATION_ITEMS}
+      navbarProps={{
+        logo: (<Logo />),
+        right: (
+          <Button
+            href="https://szk4u.mjt.lu/wgt/szk4u/xu59/form?c=0799e44b"
+            target="_blank"
+            variant="contained"
+            onClick={() => logAnalyticsEvent('click', { label: 'Try TCGist' })}
+          >
+            Try TCGist
+          </Button>
+        )
+      }}
     >
       <Container sx={{ pt: 15 }}>
         <Typography variant="h4">
           {set.name} Set Completion
         </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={4} py={3} >
           {cards?.map((card) => (
             <Grid item xs={3} key={card.collectorNumber}>
               <Stack spacing={1}>
