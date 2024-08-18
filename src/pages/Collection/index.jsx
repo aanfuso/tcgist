@@ -131,7 +131,7 @@ export default function SetProgressPage() {
                     />
                   </Collapse>
 
-                  { debug &&  <Debug rows={rows} handleFile={handleFile} />}
+                  { debug && <Debug rows={rows} handleFile={handleFile} />}
                 </Stack>
               </Grid>
             </Grid>
