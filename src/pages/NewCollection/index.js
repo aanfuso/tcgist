@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import qs from 'qs';
 import {
   Button,
   Container,
@@ -25,6 +26,8 @@ import { getFullSet } from '../Collection/requests';
 
 
 export default function NewCollection() {
+  const { search } = useLocation();
+  const { debug } = qs.parse(search, { ignoreQueryPrefix: true });
   const { setCode } = useParams();
 
   const [set, setSet] = useState({});
@@ -91,6 +94,7 @@ export default function NewCollection() {
                 />
               </Grid>
               <Grid item xs={12}>
+              {debug && <pre>{JSON.stringify(stats, null, 2) }</pre>}
               </Grid>
             </Grid>
           </Grid>
