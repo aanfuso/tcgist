@@ -19,7 +19,7 @@ export default function SetCompletion(props) {
     <Card>
       <CardMedia
         component="img"
-        image={`/sets/${set.setCode}.webp` || '/defaults/magic-logo.png'}
+        image={`/sets/${set.code}.webp` || '/defaults/magic-logo.png'}
         onError={(e) => e.target.src = '/defaults/magic-logo.png'}
         alt={set.name}
         sx={{ p: 5 }}
