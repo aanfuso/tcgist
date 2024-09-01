@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
 
 import Layout from "lib/components/Layout";
+import { logAnalyticsEvent } from 'lib/firebase/analytics';
+
+import { base } from 'themes';
+import { Logo } from 'shared/icons';
+import { FOOTER_PROPS } from 'shared/constants';
+
 import PlatformSelector from "./PlatformSelector";
 
-import {
-  convertToCSV,
-  parseList,
- } from "./utils";
+import { convertToCSV, parseList } from "./utils";
 
 import { useLocalStorage } from "utils/hooks";
 import { MOXFIELD } from "utils/constants";
@@ -44,7 +47,23 @@ export default function CreateList() {
   }
 
   return (
-    <Layout>
+    <Layout
+      theme={base}
+      footerProps={FOOTER_PROPS}
+      navbarProps={{
+        logo: (<Logo />),
+        right: (
+          <Button
+            href="https://szk4u.mjt.lu/wgt/szk4u/xu59/form?c=0799e44b"
+            target="_blank"
+            variant="contained"
+            onClick={() => logAnalyticsEvent('click', { label: 'Try TCGist' })}
+          >
+            Try TCGist
+          </Button>
+        )
+      }}
+    >
       <Container sx={{ pt: 10, height: "100vh" }}>
         <Typography gutterBottom variant="h5">
           Create a new list
