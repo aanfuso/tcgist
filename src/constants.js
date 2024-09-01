@@ -9,3 +9,10 @@ export const RED = 'red';
 export const GREEN = 'green';
 export const COLORLESS = 'colorless';
 export const MISSING = 'missing';
+
+export const RARITY_TO_VALUE = {
+  [COMMON]: 'C',
+  [UNCOMMON]: 'U',
+  [RARE]: 'R',
+  [MYTHIC]: 'M',
+};

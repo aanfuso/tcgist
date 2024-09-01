@@ -1,14 +1,16 @@
-export const COMMON = 'common';
-export const UNCOMMON = 'uncommon';
-export const RARE = 'rare';
-export const MYTHIC = 'mythic';
-export const WHITE = 'white';
-export const BLUE = 'blue';
-export const BLACK = 'black';
-export const RED = 'red';
-export const GREEN = 'green';
-export const COLORLESS = 'colorless';
-export const MISSING = 'missing';
+import {
+  COMMON,
+  UNCOMMON,
+  RARE,
+  MYTHIC,
+  WHITE,
+  BLUE,
+  BLACK,
+  RED,
+  GREEN,
+  COLORLESS,
+  MISSING,
+} from 'constants';
 
 export const DEFAULT_SET_STATS = {
   [BLACK]: {
@@ -62,11 +64,4 @@ export const DEFAULT_SET_STATS = {
     total: 2,
     value: 50,
   }
-};
-
-export const RARITY_TO_VALUE = {
-  [COMMON]: 'C',
-  [UNCOMMON]: 'U',
-  [RARE]: 'R',
-  [MYTHIC]: 'M',
 };
