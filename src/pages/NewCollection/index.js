@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Button,
@@ -18,33 +19,35 @@ import { FOOTER_PROPS } from 'shared/constants';
 import Card from 'components/Card';
 import SetCompletion from 'components/SetCompletion';
 
+import Debug from './Debug';
+
 import { useDebug, useSet } from 'hooks';
 
-import { getStats } from '../Collection/utils';
-
+import { getStats, mergeCards } from './utils';
 
 export default function NewCollection() {
   const debug = useDebug()
   const { setCode } = useParams();
   const { set, cards, setCards } = useSet(setCode);
+  const [list, setList] = useState([]);
 
-  const handleCountChange = (quantity, card, type) => {
-    const newList = cards.map((c) => {
-      if (c.collectorNumber === card.collectorNumber) {
+  const handleCountChange = (quantity, target, type) => {
+    const newList = cards.map((card) => {
+      if (card.collectorNumber === target.collectorNumber) {
         return {
-          ...c,
+          ...card,
           collected: quantity > 0,
           [`${type}Qty`]: quantity,
         };
       }
-      return c;
+      return card;
     });
 
     setCards(newList);
   };
 
-
-  const stats = getStats(cards);
+  const allCards = mergeCards({ cards, list });
+  const stats = getStats(allCards);
 
   return (
     <Layout
@@ -78,6 +81,7 @@ export default function NewCollection() {
                 />
               </Grid>
               <Grid item xs={12}>
+              {debug && <Debug setList={setList} />}
               {debug && <pre>{JSON.stringify(stats, null, 2) }</pre>}
               </Grid>
             </Grid>
@@ -85,7 +89,7 @@ export default function NewCollection() {
 
           <Grid item xs={12} sm={7} md={8}>
             <Grid container spacing={4} py={3}>
-              {cards?.map((card) => (
+              {allCards?.map((card) => (
                 <Grid item xs={3} key={card.collectorNumber}>
                   <Stack spacing={1}>
                     <Card {...card} selected={card.regularQty > 0} />
@@ -96,6 +100,7 @@ export default function NewCollection() {
                       type="number"
                       variant="soft"
                       min={0}
+                      value={card.regularQty}
                     />
                     <Input
                       onChange={(e) => handleCountChange(e.target.value, card, 'foil')}
@@ -104,6 +109,7 @@ export default function NewCollection() {
                       type="number"
                       variant="soft"
                       min={0}
+                      value={card.foilQty}
                     />
                   </Stack>
                 </Grid>
