@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Collection from "pages/Collection";
 import NewCollection from "pages/NewCollection";
+import Parser from "pages/Parser";
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/agu/mtg/:setCode" element={<Collection />} />
         <Route path="/agu/mtg/:setCode/new" element={<NewCollection />} />
+        <Route path="/parser" element={<Parser />} />
 
         <Route
           path="*"
