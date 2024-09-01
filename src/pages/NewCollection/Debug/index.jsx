@@ -2,8 +2,7 @@ import { Button } from '@mui/material';
 import { CloudUpload } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
-import { getStats } from '../utils';
-
+import { parseList } from './utils';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -17,24 +16,33 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-export default function Debug({ rows, handleFile }) {
+export default function Debug({ setList }) {
+  const reader = new FileReader();
 
-  const stats = getStats(rows);
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const parsed = parseList(text).slice(1);
+
+    setList(parsed);
+  }
+
+  const handleFile = (e) => {
+    const files = Array.from(e.target.files);
+
+    reader.readAsText(files[0]);
+  }
+
 
   return (
-    <>
-      <Button
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-        startIcon={<CloudUpload />}
-        >
-        Import
-        <VisuallyHiddenInput type="file" onChange={handleFile} />
-      </Button>
-
-      <pre>{JSON.stringify(stats, null, 2) }</pre>
-    </>
+    <Button
+      component="label"
+      role={undefined}
+      variant="contained"
+      tabIndex={-1}
+      startIcon={<CloudUpload />}
+      >
+      Import
+      <VisuallyHiddenInput type="file" onChange={handleFile} />
+    </Button>
   );
 }
