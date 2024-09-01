@@ -12,7 +12,7 @@ import {
 import { useLocalStorage } from "utils/hooks";
 import { MOXFIELD } from "utils/constants";
 
-export function CreateList() {
+export default function CreateList() {
   const [textList, setTextList] = useState();
   const [items, setItems] = useLocalStorage("buylist", []);
   const [parser, setParser] = useState(MOXFIELD);
