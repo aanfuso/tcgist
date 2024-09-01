@@ -5,15 +5,15 @@ import Layout from "lib/components/Layout";
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
 
 import { base } from 'themes';
-import { Logo } from 'shared/icons';
-import { FOOTER_PROPS } from 'shared/constants';
+import { Logo } from 'components/icons';
+import { FOOTER_PROPS } from 'constants';
 
 import PlatformSelector from "./PlatformSelector";
 
 import { convertToCSV, parseList } from "./utils";
 
-import { useLocalStorage } from "utils/hooks";
-import { MOXFIELD } from "utils/constants";
+import { useLocalStorage } from "hooks";
+import { MOXFIELD } from "./constants";
 
 export default function CreateList() {
   const [textList, setTextList] = useState();

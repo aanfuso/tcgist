@@ -7,8 +7,8 @@ import { CardPreview } from "./CardPreview";
 import Layout from "lib/components/Layout";
 
 import { base } from "themes";
-import { useLocalStorage } from "utils/hooks";
-import { FOOTER_PROPS } from "shared/constants";
+import { useLocalStorage } from "hooks";
+import { FOOTER_PROPS } from "constants";
 
 const sectionStyles = { p: 10 };
 

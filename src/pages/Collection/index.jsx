@@ -12,8 +12,8 @@ import Layout from 'lib/components/Layout';
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
 
 import { base } from 'themes';
-import { Logo } from 'shared/icons';
-import { FOOTER_PROPS } from 'shared/constants';
+import { Logo } from 'components/icons';
+import { FOOTER_PROPS } from 'constants';
 
 import SetCompletion from 'components/SetCompletion';
 

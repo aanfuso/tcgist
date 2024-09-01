@@ -3,7 +3,7 @@ import Layout from 'lib/components/Layout';
 import Hero from './Hero';
 
 import { base } from 'themes';
-import { FOOTER_PROPS } from 'shared/constants';
+import { FOOTER_PROPS } from 'constants';
 
 
 const Home = () => (

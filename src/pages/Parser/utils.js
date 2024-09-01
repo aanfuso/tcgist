@@ -1,4 +1,4 @@
-import { MOXFIELD, TCGPLAYER, DELVERSCAN } from "utils/constants";
+import { MOXFIELD, TCGPLAYER, DELVERSCAN } from "./constants";
 
 const TEMPLATE_BY_PLATFORM = {
   [MOXFIELD]: ({

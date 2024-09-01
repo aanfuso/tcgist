@@ -1,4 +1,4 @@
-import { W, U, B, R, G, C } from 'shared/icons';
+import { W, U, B, R, G, C } from 'components/icons';
 
 export const COMMON = 'common';
 export const UNCOMMON = 'uncommon';

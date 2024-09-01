@@ -3,7 +3,7 @@ import {
   ToggleButtonGroup,
  } from "@mui/material";
 
-import { MOXFIELD, TCGPLAYER, DELVERSCAN } from "utils/constants";
+import { MOXFIELD, TCGPLAYER, DELVERSCAN } from "./constants";
 
 const PlatformSelector = ({ platform, handleChange}) => (
   <ToggleButtonGroup
