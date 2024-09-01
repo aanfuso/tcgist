@@ -15,9 +15,10 @@ import { base } from 'themes';
 import { Logo } from 'shared/icons';
 import { FOOTER_PROPS } from 'shared/constants';
 
+import SetCompletion from 'components/SetCompletion';
+
 import ContactForm from './ContactForm';
 import CardsExplorer from './CardsExplorer';
-import SetCompletion from './SetCompletion';
 
 import { useData } from './hooks';
 import { useSet } from 'hooks';

@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Stars } from '@mui/icons-material';
 
-import { STATS }  from '../constants';
+import { STATS }  from './constants';
 
 
 export default function SetCompletion(props) {

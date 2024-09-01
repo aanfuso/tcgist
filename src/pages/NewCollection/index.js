@@ -16,7 +16,7 @@ import { Logo } from 'shared/icons';
 import { FOOTER_PROPS } from 'shared/constants';
 
 import Card from 'components/Card';
-import SetCompletion from 'pages/Collection/SetCompletion';
+import SetCompletion from 'components/SetCompletion';
 
 import { useDebug, useSet } from 'hooks';
 
