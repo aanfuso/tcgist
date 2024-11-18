@@ -75,7 +75,7 @@ export default function SetProgressPage() {
         </Typography>
         <Grid container spacing={4} py={3}>
           <Grid item xs={12} sm={5} md={4}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} style={{ position: "sticky", top: 80 }}>
               <Grid item xs={12}>
                 <SetCompletion
                   set={set}
