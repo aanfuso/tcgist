@@ -12,7 +12,7 @@ import { FOOTER_PROPS } from "constants";
 
 const sectionStyles = { p: 10 };
 
-export function Buylist() {
+export default function Buylist() {
   const [buyer,] = useState({
     name: "Agustin",
     phone: "971505246532",
