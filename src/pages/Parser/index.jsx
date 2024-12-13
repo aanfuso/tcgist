@@ -10,14 +10,14 @@ import { FOOTER_PROPS } from 'constants';
 
 import PlatformSelector from "./PlatformSelector";
 
-import useBuylist from "../Buylist/data/buylist";
+import { useData } from "hooks";
 import { convertToCSV, parseList } from "./utils";
 
 import { MOXFIELD } from "./constants";
 
 export default function CreateList() {
   const [textList, setTextList] = useState();
-  const [buylist, saveList] = useBuylist(`tcgist/buylist`);
+  const [buylist, saveList] = useData(`tcgist/buylist`);
   const [parser, setParser] = useState(MOXFIELD);
 
   useEffect(() => {

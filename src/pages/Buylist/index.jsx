@@ -6,7 +6,7 @@ import Layout from "lib/components/Layout";
 import { base } from "themes";
 import { FOOTER_PROPS } from "constants";
 
-import useBuylist from "./data/buylist";
+import { useData } from "hooks";
 import { BuylistItem } from "./BuylistItem";
 import { CardPreview } from "./CardPreview";
 
@@ -17,7 +17,7 @@ export default function Buylist() {
     name: "Agustin",
     phone: "971505246532",
   });
-  const [buylist,] = useBuylist(`tcgist/buylist`);
+  const [buylist,] = useData(`tcgist/buylist`);
   const [preview, setPreview] = useState({});
 
   const listing = buylist?.map((item, index) => (

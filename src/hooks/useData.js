@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { onValue, ref, set } from "firebase/database";
 import { db } from "lib/firebase";
 
-const useBuylist = (path) => {
+const useData = (path) => {
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const useBuylist = (path) => {
   return [data, save];
 };
 
-export default useBuylist;
+export default useData;
