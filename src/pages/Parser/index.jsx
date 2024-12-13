@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
-import { ref, set } from "firebase/database";
 
-import { db } from "lib/firebase";
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
 import Layout from "lib/components/Layout";
 
@@ -15,17 +13,16 @@ import PlatformSelector from "./PlatformSelector";
 import useBuylist from "../Buylist/data/buylist";
 import { convertToCSV, parseList } from "./utils";
 
-import { useLocalStorage } from "hooks";
 import { MOXFIELD } from "./constants";
 
 export default function CreateList() {
   const [textList, setTextList] = useState();
-  const buylist = useBuylist(`tcgist/buylist`) || "[]";
+  const [buylist, saveList] = useBuylist(`tcgist/buylist`);
   const [parser, setParser] = useState(MOXFIELD);
 
   useEffect(() => {
-    if (buylist.length) {
-      const asText = convertToCSV(JSON.parse(buylist), parser);
+    if (buylist?.length) {
+      const asText = convertToCSV(buylist, parser);
 
       setTextList(asText);
     }
@@ -40,7 +37,7 @@ export default function CreateList() {
   const handleSave = () => {
     const data = parseList(textList, parser);
 
-    set(ref(db, 'tcgist/buylist'), JSON.stringify(data));
+    saveList(data);
   }
 
   const handlePlatformChange = (event, platform) => {

@@ -17,11 +17,10 @@ export default function Buylist() {
     name: "Agustin",
     phone: "971505246532",
   });
-  const buylist = useBuylist(`tcgist/buylist`) || "[]";
+  const [buylist,] = useBuylist(`tcgist/buylist`);
   const [preview, setPreview] = useState({});
 
-  const items = JSON.parse(buylist);
-  const listing = items.map((item, index) => (
+  const listing = buylist?.map((item, index) => (
     <BuylistItem
       buyer={buyer}
       item={item}
@@ -38,11 +37,11 @@ export default function Buylist() {
         </Typography>
 
         <Typography gutterBottom variant="body1">
-          {`This list has ${items.length} individual items`}
+          {`This list has ${buylist?.length} individual items`}
         </Typography>
 
         <Typography gutterBottom variant="body1">
-          {`This list has ${items.reduce((n, {quantity}) => n + quantity, 0)} items in total`}
+          {`This list has ${buylist?.reduce((n, {quantity}) => n + quantity, 0)} items in total`}
         </Typography>
 
         <Divider />

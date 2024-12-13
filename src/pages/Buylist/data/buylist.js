@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { onValue, ref, set } from "firebase/database";
 import { db } from "lib/firebase";
-import { onValue, ref } from "firebase/database";
 
 const useBuylist = (path) => {
   const [data, setData] = useState();
@@ -15,7 +15,11 @@ const useBuylist = (path) => {
     })
   }, [path])
 
-  return data;
+  const save = (list) => {
+    set(ref(db, path), list);
+  }
+
+  return [data, save];
 };
 
 export default useBuylist;
