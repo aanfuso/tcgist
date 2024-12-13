@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
+import { ref, set } from "firebase/database";
 
-import Layout from "lib/components/Layout";
+import { db } from "lib/firebase";
 import { logAnalyticsEvent } from 'lib/firebase/analytics';
+import Layout from "lib/components/Layout";
 
 import { base } from 'themes';
 import { Logo } from 'components/icons';
@@ -37,9 +39,7 @@ export default function CreateList() {
   const handleSave = () => {
     const data = parseList(textList, parser);
 
-    setItems(data);
-
-    window.location.href = "/";
+    set(ref(db, 'tcgist/buylist'), JSON.stringify(data));
   }
 
   const handlePlatformChange = (event, platform) => {
