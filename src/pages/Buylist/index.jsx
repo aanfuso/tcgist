@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Box, Divider, Grid, List, Typography } from "@mui/material";
 
-import { BuylistItem } from "./BuylistItem";
-import { CardPreview } from "./CardPreview";
-
 import Layout from "lib/components/Layout";
 
 import { base } from "themes";
-import useBuylist from "./data/buylist";
 import { FOOTER_PROPS } from "constants";
+
+import useBuylist from "./data/buylist";
+import { BuylistItem } from "./BuylistItem";
+import { CardPreview } from "./CardPreview";
 
 const sectionStyles = { p: 10 };
 
@@ -17,10 +17,8 @@ export default function Buylist() {
     name: "Agustin",
     phone: "971505246532",
   });
-  const buylist = useBuylist(`tcgist/buylist`) || "";
+  const buylist = useBuylist(`tcgist/buylist`) || "[]";
   const [preview, setPreview] = useState({});
-
-  const { name } = buyer;
 
   const items = JSON.parse(buylist);
   const listing = items.map((item, index) => (
@@ -36,7 +34,7 @@ export default function Buylist() {
     <Layout theme={base} disableNavbar={true} footerProps={FOOTER_PROPS}>
       <Box id="whatsapp-buylist" sx={sectionStyles}>
         <Typography gutterBottom variant="h5">
-          {name}'s buylist
+          {buyer.name}'s buylist
         </Typography>
 
         <Typography gutterBottom variant="body1">
