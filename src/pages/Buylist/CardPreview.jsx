@@ -53,9 +53,6 @@ export function CardPreview({ item, imageSize = "normal" }) {
       <Typography gutterBottom variant="body1">
         USD {prices?.usd}
       </Typography>
-      <Typography gutterBottom variant="body1">
-        EUR {prices?.eur}
-      </Typography>
     </Box>
   );
 };
