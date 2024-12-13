@@ -12,6 +12,7 @@ import { FOOTER_PROPS } from 'constants';
 
 import PlatformSelector from "./PlatformSelector";
 
+import useBuylist from "../Buylist/data/buylist";
 import { convertToCSV, parseList } from "./utils";
 
 import { useLocalStorage } from "hooks";
@@ -19,16 +20,16 @@ import { MOXFIELD } from "./constants";
 
 export default function CreateList() {
   const [textList, setTextList] = useState();
-  const [items, setItems] = useLocalStorage("buylist", []);
+  const buylist = useBuylist(`tcgist/buylist`) || "[]";
   const [parser, setParser] = useState(MOXFIELD);
 
   useEffect(() => {
-    if (items.length) {
-      const asText = convertToCSV(items, parser);
+    if (buylist.length) {
+      const asText = convertToCSV(JSON.parse(buylist), parser);
 
       setTextList(asText);
     }
-  }, [parser, items]);
+  }, [parser, buylist]);
 
   const handleChange = (event) => {
     const text = event.target.value;
