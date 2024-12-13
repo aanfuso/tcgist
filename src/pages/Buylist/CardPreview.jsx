@@ -33,11 +33,8 @@ export function CardPreview({ item, imageSize = "normal" }) {
 
   return (
     <Box
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        p: 2,
-      }}
+      sx={{ width: "100%", maxWidth: 360, p: 2 }}
+      style={{ position: "sticky", top: 80 }}
     >
       <CardMedia
         component="img"
