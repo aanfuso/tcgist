@@ -7,7 +7,7 @@ import { CardPreview } from "./CardPreview";
 import Layout from "lib/components/Layout";
 
 import { base } from "themes";
-import { useLocalStorage } from "hooks";
+import useBuylist from "./data/buylist";
 import { FOOTER_PROPS } from "constants";
 
 const sectionStyles = { p: 10 };
@@ -17,11 +17,12 @@ export default function Buylist() {
     name: "Agustin",
     phone: "971505246532",
   });
+  const buylist = useBuylist(`tcgist/buylist`) || "";
   const [preview, setPreview] = useState({});
-  const [items,] = useLocalStorage("buylist", []);
 
   const { name } = buyer;
 
+  const items = JSON.parse(buylist);
   const listing = items.map((item, index) => (
     <BuylistItem
       buyer={buyer}

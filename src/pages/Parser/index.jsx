@@ -97,6 +97,7 @@ export default function CreateList() {
             Save
           </Button>
         </Stack>
+        <pre>{JSON.stringify(parseList(textList, parser), null, 2) }</pre>
       </Container>
     </Layout>
   );
