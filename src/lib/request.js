@@ -1,7 +1,5 @@
 import { getSession } from './sessions';
 
-const API_URL = 'https://api.openai.com/v1';
-
 const defaultOptions = {
   method: 'GET',
   mode: 'cors',
@@ -17,7 +15,7 @@ export const fetchApi = async (path, opts = {}) => {
     options.headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${path}`, options);
+  const response = await fetch(path, options);
   const length = response.headers.get('Content-Length');
 
   // Unprocessable entity (may be validation errrors)

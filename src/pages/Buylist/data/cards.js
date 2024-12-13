@@ -4,7 +4,7 @@ export const getCard = async ({ set, collectorNumber }) => {
   const lowercaseSet = set.toLowerCase();
 
   try {
-    const response = await get(`/cards/${lowercaseSet}/${collectorNumber}`);
+    const response = await get(`https://api.scryfall.com/cards/${lowercaseSet}/${collectorNumber}`);
 
     return parseCard(response);
   } catch (error) {
